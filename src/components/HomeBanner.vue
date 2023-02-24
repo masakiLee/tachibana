@@ -3,10 +3,10 @@ export default {
   data() {
     return {
       banner: [
-        { images: "../src/assets/image/bannerOne.jpg" },
-        { images: "../src/assets/image/bannerTwo.jpg" },
-        { images: "../src/assets/image/bannerThree.jpg" },
-        { images: "../src/assets/image/bannerFour.jpg" },
+        { images: "../assets/image/bannerOne.jpg" },
+        { images: "../assets/image/bannerTwo.jpg" },
+        { images: "../assets/image/bannerThree.jpg" },
+        { images: "../assets/image/bannerFour.jpg" },
       ],
     };
   },

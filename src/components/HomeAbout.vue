@@ -1,24 +1,29 @@
 <script>
+import aboutOne from "../assets/image/aboutOne.jpg";
+import aboutTwo from "../assets/image/aboutTwo.jpg";
+import aboutThree from "../assets/image/aboutThree.jpg";
+import aboutFour from "../assets/image/aboutFour.jpg";
+import aboutFive from "../assets/image/aboutFive.jpg";
 export default {
   data() {
     return {
       aboutPicture: [
         {
-          imageUrl: "../assets/image/aboutOne.jpg",
+          imageUrl: aboutOne,
           bsClass: "d-none d-md-block",
         },
         {
-          imageUrl: "../assets/image/aboutTwo.jpg",
+          imageUrl: aboutTwo,
         },
         {
-          imageUrl: "../assets/image/aboutThree.jpg",
+          imageUrl: aboutThree,
         },
         {
-          imageUrl: "../assets/image/aboutFour.jpg",
+          imageUrl: aboutFour,
           bsClass: "d-none d-md-block",
         },
         {
-          imageUrl: "../assets/image/aboutFive.jpg",
+          imageUrl: aboutFive,
           bsClass: "d-none d-md-block",
         },
       ],

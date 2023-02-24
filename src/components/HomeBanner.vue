@@ -1,12 +1,17 @@
 <script>
+import bannerOne from "../assets/image/bannerOne.jpg";
+import bannerTwo from "../assets/image/bannerOne.jpg";
+import bannerThree from "../assets/image/bannerThree.jpg";
+import bannerFour from "../assets/image/bannerFour.jpg";
+
 export default {
   data() {
     return {
       banner: [
-        { images: "../assets/image/bannerOne.jpg" },
-        { images: "../assets/image/bannerTwo.jpg" },
-        { images: "../assets/image/bannerThree.jpg" },
-        { images: "../assets/image/bannerFour.jpg" },
+        { images: bannerOne },
+        { images: bannerTwo },
+        { images: bannerThree },
+        { images: bannerFour },
       ],
     };
   },

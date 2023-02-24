@@ -1,19 +1,12 @@
 <script>
-// import { Collapse } from "bootstrap";
-let myColloapse = "";
-
 export default {
   data() {
     return {};
   },
   methods: {
-    openShow() {
-      myColloapse.show();
-    },
+    openShow() {},
   },
-  mounted() {
-    // myColloapse = new bootstrap.Collapse(document.getElementById("collapse"));
-  },
+  mounted() {},
 };
 </script>
 <template>

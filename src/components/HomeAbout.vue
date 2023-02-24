@@ -4,21 +4,21 @@ export default {
     return {
       aboutPicture: [
         {
-          imageUrl: "/src/assets/image/aboutOne.jpg",
+          imageUrl: "../assets/image/aboutOne.jpg",
           bsClass: "d-none d-md-block",
         },
         {
-          imageUrl: "/src/assets/image/aboutTwo.jpg",
+          imageUrl: "../assets/image/aboutTwo.jpg",
         },
         {
-          imageUrl: "/src/assets/image/aboutThree.jpg",
+          imageUrl: "../assets/image/aboutThree.jpg",
         },
         {
-          imageUrl: "/src/assets/image/aboutFour.jpg",
+          imageUrl: "../assets/image/aboutFour.jpg",
           bsClass: "d-none d-md-block",
         },
         {
-          imageUrl: "/src/assets/image/aboutFive.jpg",
+          imageUrl: "../assets/image/aboutFive.jpg",
           bsClass: "d-none d-md-block",
         },
       ],

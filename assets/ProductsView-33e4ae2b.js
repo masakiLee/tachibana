@@ -1,0 +1,1 @@
+import{_ as s,o as e,c as o,a as t}from"./index-1145b443.js";const c={},a={class:"about"},n=t("h2",null,"This is an Products pages",-1),_=[n];function r(d,i){return e(),o("div",a,_)}const u=s(c,[["render",r]]);export{u as default};

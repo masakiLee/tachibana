@@ -1,14 +1,34 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      questions: [
+        {
+          id: 1,
+          title: "有推薦的壽司？",
+          content:
+            "壽司師傅精心挑選新鮮食材，可以嘗試不同的組合，品嘗我們的美味饗宴。",
+          isOpen: true,
+        },
+        {
+          id: 2,
+          title: "有什麼素食選擇？",
+          content: "可選擇稻荷壽司，酪梨壽司，蛋奶素者可以選擇蛋壽司。",
+          isOpen: false,
+        },
+        {
+          id: 3,
+          title: "有無小孩的餐點？",
+          content: "多種適合小孩口味的壽司，例如：甜蝦壽司、蛋壽司、茶碗蒸等。",
+          isOpen: false,
+        },
+      ],
+    };
   },
-  methods: {
-    openShow() {},
-  },
-  mounted() {},
+  methods: {},
 };
 </script>
+
 <template>
   <section class="section-fqa bg-darkTwo py-10">
     <div class="container">
@@ -16,32 +36,32 @@ export default {
         常見問題
       </h2>
       <div class="row justify-content-center mt-8">
-        <div class="col-10 col-lg-6">
-          <div class="accordion mb-4" id="accordionExampleOne">
-            <div class="accordion-item border border-3 border-white">
-              <h3 class="accordion-header" id="headingOne">
-                <button
-                  class="accordion-button collapsed text-nowrap bg-dark text-white font-monospace"
-                  type="button"
-                  @click="openShow()"
-                  aria-expanded="false"
-                  aria-controls="collapseOne"
-                >
-                  <span class="fqa-list me-4">01</span> 有推薦的壽司？
-                </button>
-              </h3>
-              <div
-                id="collapse"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingOne"
-                data-bs-parent="#accordionExampleOne"
+        <div class="col-12 col-md-8">
+          <div class="accordion" id="accordionExampleOne">
+            <div
+              class="accordion-item border border-3 border-white mb-6"
+              v-for="question in questions"
+              :key="question.id"
+            >
+              <h3
+                :class="{
+                  'accordion-button': true,
+                  'not-collapsed': question.isOpen,
+                }"
+                class="accordion-button bg-dark text-white font-monospace"
+                type="button"
+                @click="question.isOpen = !question.isOpen"
               >
-                <div
-                  class="accordion-body bg-darkTwo text-white font-monospace"
-                >
-                  壽司師傅精心挑選新鮮食材，可以嘗試不同的組合，品嘗我們的美味饗宴。
-                </div>
-              </div>
+                <span class="fqa-list me-4">0{{ question.id }}</span>
+                {{ question.title }}
+              </h3>
+
+              <p
+                class="accordion-body text-white bg-darkTwo font-monospace"
+                v-if="question.isOpen"
+              >
+                {{ question.content }}
+              </p>
             </div>
           </div>
         </div>
@@ -58,6 +78,7 @@ export default {
   .accordion-body {
     font-size: 20px;
     letter-spacing: 8px;
+    padding: 16px 20px;
     @media (max-width: 768px) {
       font-size: 16px;
     }
@@ -78,7 +99,15 @@ export default {
 
 .accordion {
   --bs-accordion-btn-focus-box-shadow: none;
-  --bs-accordion-btn-icon: url(../assets/image/plus.svg);
-  --bs-accordion-btn-active-icon: url(../assets/image/minus.svg);
+}
+
+.accordion-button::after {
+  background-image: url(../assets/image/plus.svg);
+  transform: rotate(0);
+}
+
+.accordion-button.not-collapsed::after {
+  background-image: url(../assets/image/minus.svg);
+  transform: rotate(180deg);
 }
 </style>

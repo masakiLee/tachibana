@@ -44,7 +44,7 @@ export default {
             >
               橘鮨理念
             </h2>
-            <h3 class="about-text mt-7 mt-md-9 ms-8">
+            <h3 class="about-text mt-7 mt-md-9 ms-4 ms-md-8">
               選用新鮮食材 最適合的調理方式 並以精美刀工 盛裝的器皿融合色彩
               平衡呈現於盤上 享用美食同時 欣賞到精緻的藝術品
             </h3>

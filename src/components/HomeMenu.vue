@@ -14,10 +14,10 @@ export default {
     <div class="menuOne position-absolute">
       <img src="../assets/image/menuOne.png" alt="" class="d-none d-md-block" />
     </div>
-    <div class="menuTwo position-absolute">
+    <div class="menuTwo position-absolute" data-aos="fade-left">
       <img src="../assets/image/menuTwo.png" alt="" class="" />
     </div>
-    <div class="menuThree position-absolute">
+    <div class="menuThree position-absolute" data-aos="fade-right">
       <img src="../assets/image/menuThree.png" alt="" class="" />
     </div>
     <div class="container">
@@ -46,6 +46,9 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.section-menu {
+  overflow: hidden;
+}
 .menuOne {
   width: 124px;
   height: 124px;

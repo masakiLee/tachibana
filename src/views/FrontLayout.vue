@@ -3,7 +3,6 @@ export default {
   data() {
     return {};
   },
-  components: {},
   methods: {
     toggleNavToggler() {
       const navToggler = document.querySelector("#nav-toggler");
@@ -42,6 +41,48 @@ export default {
     </div>
   </header>
   <RouterView></RouterView>
+  <footer class="bg-dark footer">
+    <div class="container">
+      <div class="py-8 row">
+        <div class="col-md-6">
+          <div class="logo text-center">
+            <img src="../assets/image/logo-sm.svg" alt="logo" />
+            <p class="logoName">TACHIBANA</p>
+            <p class="lesp">SUSHI</p>
+          </div>
+        </div>
+        <div
+          class="col-md-6 text-end d-flex flex-column justify-content-between"
+        >
+          <ul class="d-flex justify-content-center justify-content-md-end">
+            <li class="px-1 px-xl-3"><RouterLink to="/">首頁</RouterLink></li>
+            ｜
+            <li class="px-1 px-xl-3">
+              <RouterLink to="/news">最新消息</RouterLink>
+            </li>
+            ｜
+            <li class="px-1 px-xl-3">美味菜單</li>
+            ｜
+            <li class="text-primary px-1 ps-xl-3">後台登入</li>
+          </ul>
+          <a
+            href="tel:+886-2-9999334"
+            class="border border-3 border-primary p-3 my-3 align-self-center align-self-md-end text-center text-md-end"
+            ><i class="bi bi-telephone-fill me-2"></i>02-2999-9334
+            <span class="d-block mt-1">11：00 ~ 21：00 週三休息</span>
+          </a>
+          <ul>
+            <li class="mb-2 text-center text-md-end">
+              22060 新北市板橋區縣民大道一段22號
+            </li>
+            <li class="font-monospace text-center text-md-end">
+              Copyright © 橘鮨 2023 All Rights Reserved.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <style scoped lang="scss">
@@ -146,6 +187,25 @@ export default {
       transform: translateY(12px);
       transition: top 0.5s 0.5s, transform 0.5s;
     }
+  }
+}
+
+.footer {
+  .logo {
+    width: 160px;
+    @media (max-width: 768px) {
+      margin: 0 auto;
+    }
+  }
+  .logoName {
+    font-family: "Permanent Marker";
+    font-size: 24px;
+  }
+  .lesp {
+    letter-spacing: 4px;
+  }
+  .bi-telephone-fill {
+    color: #f25c05;
   }
 }
 </style>

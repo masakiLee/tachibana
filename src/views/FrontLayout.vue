@@ -13,9 +13,7 @@ export default {
 </script>
 
 <template>
-  <header
-    class="header d-flex flex-md-column align-items-end justify-content-between justify-content-md-end"
-  >
+  <header class="header d-flex flex-column justify-content-end">
     <input type="checkbox" name="nav-toggler" id="nav-toggler" />
     <nav class="nav">
       <RouterLink to="/" class="navList" @click="toggleNavToggler"
@@ -24,7 +22,11 @@ export default {
       <RouterLink to="/news" class="navList" @click="toggleNavToggler"
         >最新消息</RouterLink
       >
-      <a href="#" class="navList">美味菜單</a>
+      <a href="#" class="navList"
+        ><RouterLink to="/products" class="navList" @click="toggleNavToggler"
+          >美味菜單</RouterLink
+        ></a
+      >
       <a href="#" class="navList text-primary">後台登入</a>
     </nav>
     <label for="nav-toggler" class="hamburgerBtn">
@@ -61,7 +63,9 @@ export default {
               <RouterLink to="/news">最新消息</RouterLink>
             </li>
             ｜
-            <li class="px-1 px-xl-3">美味菜單</li>
+            <li class="px-1 px-xl-3">
+              <RouterLink to="/products">美味菜單</RouterLink>
+            </li>
             ｜
             <li class="text-primary px-1 ps-xl-3">後台登入</li>
           </ul>
@@ -89,8 +93,8 @@ export default {
 .header {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  right: 0;
+  width: max-content;
   z-index: 8;
   background-color: transparent;
   #nav-toggler {

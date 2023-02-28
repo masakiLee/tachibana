@@ -14,12 +14,10 @@ const router = createRouter({
         {
           path: "news",
           component: () => import("../views/front/NewsView.vue"),
-          children: [
-            {
-              path: "NewsPages/:id",
-              component: () => import("../views/front/NewsPagesView.vue"),
-            },
-          ],
+        },
+        {
+          path: "news/:id",
+          component: () => import("../views/front/NewsPagesView.vue"),
         },
         {
           path: "products",

@@ -39,7 +39,7 @@ export default {
           >
             最新消息
           </h2>
-          <RouterLink class="row" :to="`NewsPages/${articles.id}`">
+          <RouterLink class="row" :to="`News/${articles.id}`">
             <div class="col-md-4">
               <div class="articles-header h-100">
                 <img
@@ -60,7 +60,9 @@ export default {
                     {{ tags }}
                   </div>
                 </div>
-                <span class="time font-monospace my-3">時間戳</span>
+                <span class="time font-monospace my-3">{{
+                  articles.time
+                }}</span>
                 <h3 class="articles-title">{{ articles.title }}</h3>
                 <p class="articles-description my-2">
                   {{ articles.description }}

@@ -95,7 +95,7 @@ export default {
 
 <style lang="scss" scoped>
 .square {
-  width: 200px;
+  width: 180px;
   aspect-ratio: 1/1;
   position: relative;
   &::before {
@@ -104,8 +104,8 @@ export default {
     position: absolute;
     top: 16px;
     right: -20px;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     background-color: #1b1b1b;
   }
 }

@@ -24,7 +24,7 @@ export default {
       >
       <a href="#" class="navList"
         ><RouterLink to="/products" class="navList" @click="toggleNavToggler"
-          >美味菜單</RouterLink
+          >逸品料理</RouterLink
         ></a
       >
       <a href="#" class="navList text-primary">後台登入</a>
@@ -64,7 +64,7 @@ export default {
             </li>
             ｜
             <li class="px-1 px-xl-3">
-              <RouterLink to="/products">美味菜單</RouterLink>
+              <RouterLink to="/products">逸品料理</RouterLink>
             </li>
             ｜
             <li class="text-primary px-1 ps-xl-3">後台登入</li>

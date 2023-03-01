@@ -44,12 +44,13 @@ export default {
             <h3 class="menu-text text-center py-8">
               橘鮨提供美味的季節性魚類 搭配蔬菜和肉類 永遠都有驚喜
             </h3>
-            <button
+            <RouterLink
+              to="/products"
               type="button"
               class="btn btn-outline-primary menu-btn d-block mx-auto btn-lg"
             >
               即刻品嘗
-            </button>
+            </RouterLink>
           </div>
         </div>
       </div>

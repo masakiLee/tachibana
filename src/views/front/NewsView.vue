@@ -1,10 +1,12 @@
 <script>
 import PageHeader from "../../components/PageHeader.vue";
+import PaginationType from "../../components/PaginationType.vue";
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
 export default {
   data() {
     return {
       articles: [],
+      page: {},
     };
   },
   methods: {
@@ -13,19 +15,21 @@ export default {
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/articles`)
         .then((res) => {
           console.log("取得最新消息頁面：", res.data.articles);
+          console.log(res.data);
           this.articles = res.data.articles;
+          this.page = res.data.pagination;
         });
     },
   },
   components: {
     PageHeader,
+    PaginationType,
   },
   mounted() {
     this.getNews();
   },
 };
 </script>
-
 <template>
   <PageHeader></PageHeader>
   <section class="section-news bg-darkTwo py-8">
@@ -80,13 +84,14 @@ export default {
           </div>
         </div>
       </div>
+      <PaginationType :pages="page" @change-newspage="getNews"></PaginationType>
     </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
 .square {
-  width: 200px;
+  width: 180px;
   aspect-ratio: 1/1;
   position: relative;
   &::before {
@@ -95,8 +100,8 @@ export default {
     position: absolute;
     top: 16px;
     right: -20px;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     background-color: #1b1b1b;
   }
 }

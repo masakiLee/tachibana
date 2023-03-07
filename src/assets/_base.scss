@@ -16,8 +16,9 @@ h1 {
     font-family: 'Permanent Marker';
     font-size: 48px;
     line-height: 48px;
-    @media (max-width: 576px) {
+    @media (max-width: 992px) {
         font-size: 24px;
+        line-height: 36px;
         text-align: center;
     }
 }

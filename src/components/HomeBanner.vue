@@ -31,12 +31,12 @@ export default {
       <img
         src="../assets/image/logo.svg"
         alt="logo"
-        class="logo-img mx-auto d-none d-sm-block"
+        class="logo-img mx-auto d-none d-lg-block"
       />
       <img
         src="../assets/image/logo-sm.svg"
         alt="logo"
-        class="logo-img mx-auto d-block d-sm-none"
+        class="logo-img mx-auto d-block d-lg-none"
       />
       <h1>TACHIBANA</h1>
       <p class="logo-name">SUSHI</p>
@@ -56,16 +56,20 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.banner {
+.banner,
+.banner-img {
   width: 100%;
   aspect-ratio: 16/9;
-  position: relative;
-}
-@media (max-width: 768px) {
-  .banner {
+  object-fit: cover;
+  @media (max-width: 768px) {
     aspect-ratio: 3/4;
+    height: 100%;
   }
 }
+.banner {
+  position: relative;
+}
+
 .banner-logo {
   width: 282px;
   height: 288px;
@@ -75,6 +79,15 @@ export default {
   left: 50%;
   margin-left: -141px;
   margin-top: -144px;
+  @media (max-width: 768px) {
+    width: 160px;
+    height: 175px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -80px;
+    margin-top: -88px;
+  }
 }
 
 .logo-name {
@@ -82,9 +95,7 @@ export default {
   font-size: 24px;
   text-align: center;
   letter-spacing: 1rem;
-}
-@media (max-width: 768px) {
-  .logo-name {
+  @media (max-width: 992px) {
     font-size: 16px;
     letter-spacing: 8px;
   }
@@ -97,7 +108,7 @@ ul > li::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 2;
 }
 
@@ -158,14 +169,14 @@ ul > li:nth-child(1) {
   }
 }
 
-.banner-img {
-  width: 100%;
-  object-fit: cover;
-  aspect-ratio: 16/9;
-}
-@media (max-width: 768px) {
-  .banner-img {
-    aspect-ratio: 3/4;
-  }
-}
+// .banner-img {
+//   width: 100%;
+//   object-fit: cover;
+//   aspect-ratio: 16/9;
+//   @media (max-width: 768px) {
+//     aspect-ratio: 3/4;
+//     object-fit: cover;
+//     height: 100%;
+//   }
+// }
 </style>

@@ -71,30 +71,36 @@ export default {
         <div
           class="col-lg-6 text-end d-flex flex-column justify-content-between"
         >
-          <ul class="d-flex justify-content-center justify-content-lg-end">
-            <li class="px-1 px-xl-3"><RouterLink to="/">首頁</RouterLink></li>
+          <ul
+            class="d-flex justify-content-center justify-content-lg-end footer-link"
+          >
+            <li class="px-0 px-xl-3">
+              <RouterLink to="/">首頁</RouterLink>
+            </li>
             ｜
-            <li class="px-1 px-xl-3">
+            <li class="px-0 px-xl-3">
               <RouterLink to="/news">最新消息</RouterLink>
             </li>
             ｜
-            <li class="px-1 px-xl-3">
+            <li class="px-0 px-xl-3">
               <RouterLink to="/products">逸品料理</RouterLink>
             </li>
             ｜
-            <li class="text-primary px-1 ps-xl-3">後台登入</li>
+            <li class="text-primary px-0 ps-xl-3">
+              <RouterLink to="/">後台登入</RouterLink>
+            </li>
           </ul>
           <a
             href="tel:+886-2-9999334"
-            class="border border-3 border-primary p-3 my-3 align-self-center align-self-lg-end text-center text-md-end"
+            class="border border-3 border-primary p-3 my-3 align-self-center align-self-lg-end text-center text-md-end tel"
             ><i class="bi bi-telephone-fill me-2"></i>02-2999-9334
             <span class="d-block mt-1">11：00 ~ 21：00 週三休息</span>
           </a>
           <ul>
-            <li class="mb-2 text-center text-lg-end">
+            <li class="mb-2 text-center text-lg-end address">
               22060 新北市板橋區縣民大道一段22號
             </li>
-            <li class="font-monospace text-center text-lg-end">
+            <li class="font-monospace text-center text-lg-end copyright">
               Copyright © 橘鮨 2023 All Rights Reserved.
             </li>
           </ul>
@@ -228,6 +234,14 @@ export default {
   }
   .bi-telephone-fill {
     color: #f25c05;
+  }
+  &-link,
+  .tel,
+  .address,
+  .copyright {
+    @media (max-width: 576px) {
+      font-size: 16px;
+    }
   }
 }
 .badge {

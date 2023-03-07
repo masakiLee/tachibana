@@ -26,6 +26,10 @@ export default {
           alert(err);
         });
     },
+    isPhone(value) {
+      const phoneNumber = /^(09)[0-9]{8}$/;
+      return phoneNumber.test(value) ? true : "需要正確的電話號碼";
+    },
   },
   components: {
     PageHeader,
@@ -101,8 +105,8 @@ export default {
                   type="text"
                   class="form-control text-20"
                   :class="{ 'is-invalid': errors['電話'] }"
-                  placeholder="請輸入電話"
-                  rules="required"
+                  placeholder="請輸入手機號碼"
+                  :rules="isPhone"
                   v-model="order.user.tel"
                 ></v-field>
                 <error-message
@@ -315,7 +319,8 @@ label {
   font-size: 48px;
   color: #f25c05;
 }
-.form-control:focus {
+.form-control:focus,
+.form-select:focus {
   background-color: #212121;
   box-shadow: none;
   color: white;

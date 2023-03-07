@@ -260,8 +260,17 @@ export default {
 }
 .bi-text {
   font-weight: 600;
+  @media (max-width: 576px) {
+    font-size: 16px;
+  }
 }
 .form-select:focus {
   box-shadow: none;
+}
+table {
+  font-size: 20px;
+  @media (max-width: 576px) {
+    font-size: 16px;
+  }
 }
 </style>

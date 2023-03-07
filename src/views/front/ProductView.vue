@@ -104,7 +104,7 @@ export default {
                 />
               </div>
               <div
-                class="about w-100 px-8 py-0 d-flex flex-column justify-content-between"
+                class="about w-100 px-4 px-md-8 py-0 d-flex flex-column justify-content-between"
               >
                 <span
                   class="category py-1 px-3 bg-darkTwo text-primary border border-white border-1 align-self-start"
@@ -131,7 +131,7 @@ export default {
                     加入購物車
                   </button>
                 </div>
-                <p class="font-monospace">
+                <p class="font-monospace note">
                   ※
                   注意：本商品含有蟹、蝦、魚類、大豆、麩質之穀物(小麥)及其製品可能導致過敏症狀
                   ※
@@ -256,5 +256,10 @@ select {
 }
 .form-select:focus {
   box-shadow: none;
+}
+.note {
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 }
 </style>

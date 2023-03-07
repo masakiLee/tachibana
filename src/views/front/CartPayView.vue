@@ -161,7 +161,7 @@ export default {
                   </tr>
                 </tbody>
               </table>
-              <div class="d-grid gap-2 col-4 ms-auto">
+              <div class="d-grid col-6 ms-auto">
                 <button
                   class="btn btn-primary payBtn text-white"
                   type="button"
@@ -261,16 +261,21 @@ export default {
 .bi-text {
   font-weight: 600;
   @media (max-width: 576px) {
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 .form-select:focus {
   box-shadow: none;
 }
+.payBtn {
+  @media (max-width: 576px) {
+    font-size: 16px;
+  }
+}
 table {
   font-size: 20px;
   @media (max-width: 576px) {
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 </style>

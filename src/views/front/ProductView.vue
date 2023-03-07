@@ -110,7 +110,9 @@ export default {
                   class="category py-1 px-3 bg-darkTwo text-primary border border-white border-1 align-self-start"
                   >{{ product.category }}</span
                 >
-                <p class="description">{{ product.description }}</p>
+                <p class="description pt-3 pt-md-0">
+                  {{ product.description }}
+                </p>
                 <p class="price text-primary">
                   {{ product.price }} /
                   <span class="unit text-white">{{ product.unit }}</span>
@@ -131,7 +133,7 @@ export default {
                     加入購物車
                   </button>
                 </div>
-                <p class="font-monospace note">
+                <p class="font-monospace note pt-3 pt-md-0">
                   ※
                   注意：本商品含有蟹、蝦、魚類、大豆、麩質之穀物(小麥)及其製品可能導致過敏症狀
                   ※
@@ -228,6 +230,9 @@ select {
 }
 .addCart {
   font-size: 20px;
+  @media (max-width: 576px) {
+    font-size: 16px;
+  }
 }
 .productsUrl {
   width: 546px;
@@ -253,6 +258,11 @@ select {
 .category-list:hover {
   background-color: #222222;
   cursor: pointer;
+}
+.form-select {
+  @media (max-width: 576px) {
+    font-size: 16px;
+  }
 }
 .form-select:focus {
   box-shadow: none;

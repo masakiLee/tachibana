@@ -8,10 +8,8 @@ export default {
 <template>
   <div class="header bg-dark">
     <RouterLink to="/" class="logo text-center py-3">
-      <h1 class="logoName">
-        TACHIBANA
-        <p class="lesp font-monospace">SUSHI</p>
-      </h1>
+      <h1 class="logoName">TACHIBANA</h1>
+      <p class="lesp">SUSHI</p>
     </RouterLink>
   </div>
 </template>
@@ -20,6 +18,7 @@ export default {
 .logoName {
   font-family: "Permanent Marker";
   font-size: 24px;
+  line-height: 26px;
 }
 .lesp {
   letter-spacing: 4px;

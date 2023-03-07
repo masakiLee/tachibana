@@ -14,7 +14,6 @@ export default {
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/article/${id}`)
         .then((res) => {
-          console.log("取得單一最新消息頁面：", res.data.article);
           this.article = res.data.article;
         });
     },
@@ -61,7 +60,7 @@ export default {
       </div>
       <div class="row justify-content-center">
         <div class="col-md-8">
-          <div class="newsPages-main text-center text-white mt-10 mb-8">
+          <div class="newsPages-main text-center text-white mt-9">
             <img
               :src="article.image"
               alt="newsImg"
@@ -77,11 +76,13 @@ export default {
                 class="newsPages-coupon bg-dark w-75 p-4 mx-auto"
                 v-if="article.title === '慶開幕輸入折扣碼享折扣'"
               >
-                <p class="coupon-title mb-2">歡慶開幕</p>
+                <p class="coupon-title mb-2 font-monospace">歡慶開幕</p>
                 <span class="bg-primary text-white px-4 coupon">OPENSUSHI</span>
-                <p class="coupon-text my-2">結帳時輸入優惠碼單筆折扣50元</p>
-                <p class="coupon-time">
-                  使用期限：<span>2023-03-26~2023/04/26</span>
+                <p class="coupon-text my-2 font-monospace">
+                  結帳時輸入優惠碼單筆折扣8折
+                </p>
+                <p class="coupon-time font-monospace">
+                  使用期限：<span>2023-03-26 ~ 2023-04-26</span>
                 </p>
               </div>
               <p class="text-end text-white mt-8">{{ article.author }}</p>

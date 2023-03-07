@@ -1,4 +1,7 @@
 <script>
+import { mapActions, mapState } from "pinia";
+import cartStore from "../stores/cart";
+
 export default {
   data() {
     return {};
@@ -8,6 +11,13 @@ export default {
       const navToggler = document.querySelector("#nav-toggler");
       navToggler.checked = false;
     },
+    ...mapActions(cartStore, ["getCart"]), //購物車列表
+  },
+  computed: {
+    ...mapState(cartStore, ["carts"]),
+  },
+  mounted() {
+    this.getCart();
   },
 };
 </script>
@@ -22,41 +32,46 @@ export default {
       <RouterLink to="/news" class="navList" @click="toggleNavToggler"
         >最新消息</RouterLink
       >
-      <a href="#" class="navList"
-        ><RouterLink to="/products" class="navList" @click="toggleNavToggler"
-          >逸品料理</RouterLink
-        ></a
+      <RouterLink to="/products" class="navList" @click="toggleNavToggler"
+        >逸品料理</RouterLink
       >
-      <a href="#" class="navList text-primary">後台登入</a>
+      <RouterLink to="/cart" class="navList" @click="toggleNavToggler"
+        >購物車</RouterLink
+      >
     </nav>
     <label for="nav-toggler" class="hamburgerBtn">
       <span class="hamburgerLine"></span>
       <span class="hamburgerLine"></span>
       <span class="hamburgerLine"></span>
     </label>
-    <div class="shoppingBtn">
-      <img
-        src="../assets/image/shopping.svg"
-        alt="購物車"
-        class="shoppingCar mx-auto"
-      />
-    </div>
+    <RouterLink to="/cart">
+      <button type="button" class="shoppingBtn position-relative border-0">
+        <img
+          src="../assets/image/shopping.svg"
+          alt="購物車"
+          class="shoppingCar mx-auto"
+        />
+        <span class="badge bg-danger position-absolute rounded-pill">{{
+          carts.length
+        }}</span>
+      </button>
+    </RouterLink>
   </header>
   <RouterView></RouterView>
   <footer class="bg-dark footer">
     <div class="container">
       <div class="py-8 row">
-        <div class="col-md-6">
-          <div class="logo text-center">
+        <div class="col-lg-6">
+          <div class="logo">
             <img src="../assets/image/logo-sm.svg" alt="logo" />
             <p class="logoName">TACHIBANA</p>
             <p class="lesp">SUSHI</p>
           </div>
         </div>
         <div
-          class="col-md-6 text-end d-flex flex-column justify-content-between"
+          class="col-lg-6 text-end d-flex flex-column justify-content-between"
         >
-          <ul class="d-flex justify-content-center justify-content-md-end">
+          <ul class="d-flex justify-content-center justify-content-lg-end">
             <li class="px-1 px-xl-3"><RouterLink to="/">首頁</RouterLink></li>
             ｜
             <li class="px-1 px-xl-3">
@@ -71,15 +86,15 @@ export default {
           </ul>
           <a
             href="tel:+886-2-9999334"
-            class="border border-3 border-primary p-3 my-3 align-self-center align-self-md-end text-center text-md-end"
+            class="border border-3 border-primary p-3 my-3 align-self-center align-self-lg-end text-center text-md-end"
             ><i class="bi bi-telephone-fill me-2"></i>02-2999-9334
             <span class="d-block mt-1">11：00 ~ 21：00 週三休息</span>
           </a>
           <ul>
-            <li class="mb-2 text-center text-md-end">
+            <li class="mb-2 text-center text-lg-end">
               22060 新北市板橋區縣民大道一段22號
             </li>
-            <li class="font-monospace text-center text-md-end">
+            <li class="font-monospace text-center text-lg-end">
               Copyright © 橘鮨 2023 All Rights Reserved.
             </li>
           </ul>
@@ -159,6 +174,7 @@ export default {
   }
   .shoppingBtn {
     background-color: #f25c05;
+    outline: 0;
     &:hover .shoppingCar {
       transform: rotate(-10deg);
     }
@@ -197,19 +213,25 @@ export default {
 .footer {
   .logo {
     width: 160px;
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       margin: 0 auto;
     }
   }
   .logoName {
     font-family: "Permanent Marker";
     font-size: 24px;
+    text-align: center;
   }
   .lesp {
     letter-spacing: 4px;
+    text-align: center;
   }
   .bi-telephone-fill {
     color: #f25c05;
   }
+}
+.badge {
+  top: 4px;
+  right: 4px;
 }
 </style>

@@ -13,7 +13,6 @@ export default {
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/articles`)
         .then((res) => {
-          console.log("取得最新消息：", res.data.articles);
           this.articles = res.data.articles[0];
         });
     },
@@ -32,7 +31,7 @@ export default {
     <div class="container">
       <div class="row justify-content-center py-10 py-md-9">
         <div
-          class="col-10 border border-3 border-white d-flex py-9 ps-8 ps-lg-10 pe-8 position-relative"
+          class="col-10 border border-3 border-white d-flex py-9 ps-8 ps-lg-9 pe-8 position-relative"
         >
           <h2
             class="articles-tips translate-middle border border-3 border-primary p-3 bg-dark"

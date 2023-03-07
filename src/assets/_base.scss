@@ -7,37 +7,41 @@
 
 body {
     line-height: 1.5;
-    font-size: 16px;
-    font-family:'M PLUS Rounded 1c', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    font-family: 'M PLUS Rounded 1c', 'Arial Narrow', Arial, sans-serif;
     color: white;
 }
 
 h1 {
     font-family: 'Permanent Marker';
     font-size: 48px;
-}
-@media (max-width: 576px) {
-    h1 {
+    line-height: 48px;
+    @media (max-width: 576px) {
         font-size: 24px;
         text-align: center;
     }
 }
 
-h2{
+
+h2 {
     font-size: 24px;
-@media (max-width: 576px) {
-    font-size: 20px;
+
+    @media (max-width: 576px) {
+        font-size: 20px;
     }
 }
+
 h3 {
     font-size: 24px;
     font-weight: 400;
+
     @media (max-width: 576px) {
-            font-size: 20px;
-        }
+        font-size: 20px;
+    }
 }
+
 p {
-    font-size: 16px;
+    font-size: 20px;
 }
 
 
@@ -69,6 +73,6 @@ p {
     padding: 0;
 }
 
-$primary:#F25C05;
-$dark:#1b1b1b;
-$darkTwo:#222222;
+$primary: #F25C05;
+$dark: #1b1b1b;
+$darkTwo: #222222;

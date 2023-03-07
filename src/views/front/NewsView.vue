@@ -14,8 +14,6 @@ export default {
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/articles`)
         .then((res) => {
-          console.log("取得最新消息頁面：", res.data.articles);
-          console.log(res.data);
           this.articles = res.data.articles;
           this.page = res.data.pagination;
         });
@@ -68,7 +66,7 @@ export default {
             <RouterLink :to="`news/${article.id}`">
               <div class="newsCard">
                 <img :src="article.image" class="card-img-top" alt="newsOne" />
-                <div class="card-body bg-darkTwo p-3">
+                <div class="card-body bg-darkTwo p-4">
                   <h2 class="card-title mb-3">
                     {{ article.title }}
                   </h2>
@@ -84,7 +82,7 @@ export default {
           </div>
         </div>
       </div>
-      <PaginationType :pages="page" @change-newspage="getNews"></PaginationType>
+      <PaginationType :pages="page" @change-page="getNews"></PaginationType>
     </div>
   </section>
 </template>

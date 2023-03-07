@@ -32,6 +32,14 @@ const router = createRouter({
           component: () => import("../views/front/CartView.vue"),
         },
         {
+          path: "cartPay/:id",
+          component: () => import("../views/front/CartPayView.vue"),
+        },
+        {
+          path: "cartComplete",
+          component: () => import("../views/front/CartCompleteView.vue"),
+        },
+        {
           path: "login",
           component: () => import("../views/front/LoginView.vue"),
         },

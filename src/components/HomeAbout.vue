@@ -37,7 +37,7 @@ export default {
   <section class="section-about bg-darkTwo">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 pt-6 pt-md-10 pb-0 pb-md-10">
+        <div class="col-md-4 pt-8 pt-md-10 pb-0 pb-md-10">
           <div class="d-flex aboutSticky">
             <h2
               class="about-tips border border-3 border-primary p-3 bg-dark align-self-start"
@@ -50,7 +50,7 @@ export default {
             </h3>
           </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 pb-6 pb-md-0">
           <ul class="aboutPictureList">
             <li
               v-for="aboutPicture in aboutPicture"

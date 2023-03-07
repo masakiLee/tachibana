@@ -27,7 +27,7 @@ export default {
 
 <template>
   <div id="banner" class="banner">
-    <div class="banner-logo">
+    <div class="banner-logo" data-aos="fade-up" data-aos-duration="3000">
       <img
         src="../assets/image/logo.svg"
         alt="logo"
@@ -38,10 +38,8 @@ export default {
         alt="logo"
         class="logo-img mx-auto d-block d-sm-none"
       />
-      <h1>
-        TACHIBANA
-        <p class="logo-name">SUSHI</p>
-      </h1>
+      <h1>TACHIBANA</h1>
+      <p class="logo-name">SUSHI</p>
     </div>
     <div class="position-relative">
       <ul>
@@ -69,11 +67,14 @@ export default {
   }
 }
 .banner-logo {
+  width: 282px;
+  height: 288px;
   z-index: 5;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  margin-left: -141px;
+  margin-top: -144px;
 }
 
 .logo-name {

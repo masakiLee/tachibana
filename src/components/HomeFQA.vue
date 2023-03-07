@@ -30,7 +30,7 @@ export default {
 </script>
 
 <template>
-  <section class="section-fqa bg-darkTwo py-10">
+  <section class="section-fqa bg-darkTwo py-8 py-md-10">
     <div class="container">
       <h2 class="fqa-tips border border-3 border-primary p-3 bg-dark mx-auto">
         常見問題
@@ -57,7 +57,7 @@ export default {
               </h3>
 
               <p
-                class="accordion-body text-white bg-darkTwo font-monospace"
+                class="accordion-body text-white bg-darkTwo font-monospace fz-16"
                 v-if="question.isOpen"
               >
                 {{ question.content }}
@@ -96,7 +96,9 @@ export default {
     font-weight: 700;
   }
 }
-
+.fz-16 {
+  font-size: 16px;
+}
 .accordion {
   --bs-accordion-btn-focus-box-shadow: none;
 }

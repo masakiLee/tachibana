@@ -15,8 +15,6 @@ export default {
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/products/?page=${page}`)
         .then((res) => {
-          console.log("取得全部商品：", res.data.products);
-          console.log(res.data);
           this.products = res.data.products;
           this.page = res.data.pagination;
         });
@@ -59,7 +57,7 @@ export default {
           </ol>
         </nav>
       </div>
-      <div class="products mt-8 mt-md-10 mb-8">
+      <div class="products mt-9 mb-8">
         <div
           class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 g-md-6 text-center"
         >
@@ -80,10 +78,7 @@ export default {
           </div>
         </div>
       </div>
-      <PaginationType
-        :pages="page"
-        @change-productspage="getProducts"
-      ></PaginationType>
+      <PaginationType :pages="page" @change-page="getProducts"></PaginationType>
     </div>
   </section>
 </template>

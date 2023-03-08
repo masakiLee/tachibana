@@ -101,8 +101,7 @@ export default {
 
 <style lang="scss" scoped>
 .loading {
-  // 動畫名 動畫時長 無限循環 正反播放 動畫以低速開始
-  animation: animate 0.6s infinite alternate ease-in-out;
+  animation: animate 1s infinite alternate ease-in;
 }
 
 @keyframes animate {

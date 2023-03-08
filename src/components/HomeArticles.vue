@@ -1,11 +1,13 @@
 <script>
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
 import { RouterLink } from "vue-router";
-
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/css/index.css";
 export default {
   data() {
     return {
       articles: {},
+      isLoading: false,
     };
   },
   methods: {
@@ -14,19 +16,36 @@ export default {
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/articles`)
         .then((res) => {
           this.articles = res.data.articles[0];
+          this.isLoading = false;
         });
     },
   },
   components: {
+    Loading,
     RouterLink,
   },
   mounted() {
+    this.isLoading = true;
     this.getNews();
   },
 };
 </script>
 
 <template>
+  <loading
+    v-model:active="isLoading"
+    :can-cancel="true"
+    :color="'#fff'"
+    :on-cancel="onCancel"
+    :is-full-page="fullPage"
+    :background-color="'#1b1b1b'"
+    :opacity="1"
+  >
+    <div class="loading">
+      <p class="loadingName text-center">TACHIBANA</p>
+      <p class="loadingLesp text-center">SUSHI</p>
+    </div></loading
+  >
   <section class="section-articles bg-dark">
     <div class="container">
       <div class="row justify-content-center py-10 py-md-9">
@@ -52,7 +71,7 @@ export default {
               <div class="articles-body d-flex flex-column h-100">
                 <div class="articles-tag d-flex mt-3">
                   <div
-                    class="tag p-2 border border-2 border-primary text-white me-2 font-monospace"
+                    class="tag p-2 border border-2 border-primary text-white me-2"
                     v-for="tags in articles.tag"
                     :key="tags.id"
                   >
@@ -81,6 +100,35 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.loading {
+  // 動畫名 動畫時長 無限循環 正反播放 動畫以低速開始
+  animation: animate 0.6s infinite alternate ease-in-out;
+}
+
+@keyframes animate {
+  to {
+    opacity: 0.08;
+    filter: blur(5px);
+    letter-spacing: 24px;
+  }
+}
+.loadingName {
+  font-family: "Permanent Marker";
+  font-size: 80px;
+  line-height: 92px;
+  @media (max-width: 576px) {
+    font-size: 48px;
+    line-height: 1;
+  }
+}
+.loadingLesp {
+  letter-spacing: 16px;
+  font-size: 24px;
+  @media (max-width: 576px) {
+    font-size: 24px;
+    line-height: 1;
+  }
+}
 .articles-image {
   width: 100%;
   height: 100%;

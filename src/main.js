@@ -1,8 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { RouterLink, RouterView } from "vue-router";
-import Loading from "vue-loading-overlay";
-import "vue-loading-overlay/dist/css/index.css";
 
 // 引入 VeeValidate 元件跟功能
 import { Field, Form, ErrorMessage, defineRule, configure } from "vee-validate";
@@ -37,8 +35,6 @@ app.use(RouterLink, RouterView);
 app.use(createPinia());
 app.use(router);
 app.use(VueAxios, axios);
-
-app.component("vueLoading", Loading);
 app.use(router);
 // 掛載 Global 的 VeeValidate 元件
 app.component("VField", Field);

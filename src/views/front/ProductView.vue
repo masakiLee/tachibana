@@ -92,7 +92,12 @@ export default {
       <div class="container">
         <div class="row pb-4 pb-md-0">
           <div class="col-lg-6">
-            <div class="product-body d-flex h-100 py-4 py-md-4 py-xl-8">
+            <div
+              class="product-body d-flex h-100 py-4 py-md-4 py-xl-8"
+              data-aos="fade-right"
+              data-aos-delay="600"
+              data-aos-duration="1000"
+            >
               <div
                 class="left py-5 px-4 border-end border-primary border-3 my-auto"
               >
@@ -146,7 +151,7 @@ export default {
             v-for="(img, index) in product.imagesUrl"
             :key="index + '123'"
           >
-            <div class="productImg">
+            <div class="productImg" data-aos="zoom-in">
               <img v-if="img" :src="img" alt="" class="productsUrl" />
             </div>
           </div>

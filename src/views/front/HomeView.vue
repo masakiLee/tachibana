@@ -6,7 +6,17 @@ import HomeMenu from "../../components/HomeMenu.vue";
 import HomeFQA from "../../components/HomeFQA.vue";
 
 export default {
-  components: { HomeBanner, HomeArticles, HomeAbout, HomeMenu, HomeFQA },
+  data() {
+    return {};
+  },
+  components: {
+    HomeBanner,
+    HomeArticles,
+    HomeAbout,
+    HomeMenu,
+    HomeFQA,
+  },
+  mounted() {},
 };
 </script>
 

@@ -65,16 +65,22 @@ export default {
           <div>
             <RouterLink :to="`news/${article.id}`">
               <div class="newsCard">
-                <img :src="article.image" class="card-img-top" alt="newsOne" />
+                <div>
+                  <img
+                    :src="article.image"
+                    class="card-img-top card-img"
+                    alt="newsOne"
+                  />
+                </div>
                 <div class="card-body bg-darkTwo p-4">
                   <h2 class="card-title mb-3">
-                    {{ article.title }}
+                    <span>{{ article.title }}</span>
                   </h2>
                   <h3 class="card-text mb-3">
-                    {{ article.description }}
+                    <span>{{ article.description }}</span>
                   </h3>
                   <p class="card-time text-primary text-end">
-                    {{ article.time }}
+                    <span>{{ article.time }}</span>
                   </p>
                 </div>
               </div>

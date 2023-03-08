@@ -22,6 +22,9 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.banner;
+  },
 };
 </script>
 

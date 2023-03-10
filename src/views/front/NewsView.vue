@@ -46,7 +46,7 @@ export default {
           aria-label="breadcrumb"
           class="ms-8 align-self-end d-none d-md-block"
         >
-          <ol class="breadcrumb font-monospace">
+          <ol class="breadcrumb">
             <li class="breadcrumb-item">
               <RouterLink to="/">首頁</RouterLink>
             </li>
@@ -56,7 +56,7 @@ export default {
           </ol>
         </nav>
       </div>
-      <div class="row align-content-start flex-wrap font-monospace mt-9">
+      <div class="row align-content-start flex-wrap my-9">
         <div
           class="col-sm-6 col-lg-4"
           v-for="article in articles"
@@ -64,7 +64,14 @@ export default {
         >
           <div>
             <RouterLink :to="`news/${article.id}`">
-              <div class="newsCard">
+              <div
+                class="newsCard"
+                data-aos="fade-zoom"
+                data-aos-easing="ease-in"
+                data-aos-delay="300"
+                data-aos-offset="0"
+                data-aos-duration="600"
+              >
                 <div>
                   <img
                     :src="article.image"
@@ -74,13 +81,13 @@ export default {
                 </div>
                 <div class="card-body bg-darkTwo p-4">
                   <h2 class="card-title mb-3">
-                    <span>{{ article.title }}</span>
+                    {{ article.title }}
                   </h2>
                   <h3 class="card-text mb-3">
-                    <span>{{ article.description }}</span>
+                    {{ article.description }}
                   </h3>
                   <p class="card-time text-primary text-end">
-                    <span>{{ article.time }}</span>
+                    {{ article.time }}
                   </p>
                 </div>
               </div>
@@ -144,6 +151,30 @@ export default {
 
   .card-time {
     font-size: 12px;
+  }
+}
+
+.sushi {
+  width: 100px;
+  height: 100px;
+  border: 8px solid #1b1b1b;
+  border-radius: 4%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: bottom right;
+  animation: roll 1s linear infinite;
+  .circular {
+    height: 50px;
+    width: 50px;
+    background-color: #f25c05;
+    border-radius: 50%;
+  }
+}
+
+@keyframes roll {
+  100% {
+    transform: translateX(-100%) rotateZ(90deg);
   }
 }
 </style>

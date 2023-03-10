@@ -229,6 +229,9 @@ export default {
     text-align: center;
   }
   .lesp {
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1;
+    font-size: 16px;
     letter-spacing: 4px;
     text-align: center;
   }

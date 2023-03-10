@@ -2,6 +2,11 @@
 import { mapActions } from "pinia";
 import PageHeader from "../../components/PageHeader.vue";
 import cartStore from "../../stores/cart";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Pagination } from "swiper";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
 export default {
   data() {
@@ -10,6 +15,7 @@ export default {
       sameCategory: [],
       id: "",
       qty: 1,
+      modules: [Pagination],
     };
   },
   methods: {
@@ -43,6 +49,8 @@ export default {
   },
   components: {
     PageHeader,
+    Swiper,
+    SwiperSlide,
   },
   mounted() {
     this.getProduct();
@@ -74,7 +82,7 @@ export default {
           aria-label="breadcrumb"
           class="ms-8 align-self-end d-none d-md-block"
         >
-          <ol class="breadcrumb font-monospace text-nowrap">
+          <ol class="breadcrumb text-nowrap">
             <li class="breadcrumb-item">
               <RouterLink to="/">首頁</RouterLink>
             </li>
@@ -119,8 +127,9 @@ export default {
                   {{ product.description }}
                 </p>
                 <p class="price text-primary">
-                  {{ product.price }} /
-                  <span class="unit text-white">{{ product.unit }}</span>
+                  {{ product.price }}/<span class="unit text-white">{{
+                    product.unit
+                  }}</span>
                 </p>
                 <div class="group d-flex">
                   <select
@@ -158,23 +167,50 @@ export default {
         </div>
       </div>
     </div>
-    <div class="same mt-10 bg-dark py-4">
+    <div class="same mt-4 mt-md-10 bg-dark py-6">
       <div class="container">
         <div class="category-area d-flex">
-          <div class="same-title my-auto">相關料理</div>
-          <ul class="d-flex justify-content-around w-100 text-center">
-            <RouterLink
-              :to="category.id"
-              v-for="category in sameCategory"
-              :key="category.id"
-              class="d-flex flex-column justify-content-between category-list p-3"
-            >
-              <div class="my-auto">
-                <img :src="category.imageUrl" alt="" class="categoryImg" />
-              </div>
-              <p class="font-monospace">{{ category.title }}</p>
-            </RouterLink>
-          </ul>
+          <div class="same-title my-auto p-3">系列料理</div>
+          <swiper
+            :slidesPerView="3"
+            :spaceBetween="10"
+            :pagination="{
+              clickable: true,
+            }"
+            :breakpoints="{
+              '640': {
+                slidesPerView: 3,
+                spaceBetween: 16,
+              },
+              '768': {
+                slidesPerView: 4,
+                spaceBetween: 24,
+              },
+              '1024': {
+                slidesPerView: 5,
+                spaceBetween: 24,
+              },
+            }"
+            :modules="modules"
+            class="mySwiper"
+            :observer="true"
+          >
+            <swiper-slide v-for="category in sameCategory" :key="category.id"
+              ><RouterLink
+                :to="category.id"
+                class="category-list p-3 h-100 d-flex flex-column"
+              >
+                <div class="my-auto">
+                  <img
+                    :src="category.imageUrl"
+                    alt=""
+                    class="categoryImg mx-auto"
+                  />
+                </div>
+                <p class="text-center mt-auto">{{ category.title }}</p>
+              </RouterLink>
+            </swiper-slide>
+          </swiper>
         </div>
       </div>
     </div>
@@ -276,5 +312,50 @@ select {
   @media (max-width: 768px) {
     font-size: 16px;
   }
+}
+
+.category-area {
+  position: relative; /* 將父層設為相對定位 */
+  height: 182px; /* 設定父層高度，可以根據需要做調整 */
+}
+
+.swiper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  // padding-bottom: 32px;
+  padding: 8px 16px 32px;
+  @media (max-width: 576px) {
+    padding: 0 0 24px;
+  }
+}
+
+.swiper-slide img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+}
+
+:deep(.swiper-pagination) {
+  bottom: 0;
+}
+
+:deep(.swiper-pagination)
+  .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: #f25c05;
+}
+:deep(.swiper-pagination-bullet) {
+  background-color: white;
+}
+
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
+:deep(.swiper-pagination-horizontal.swiper-pagination-bullets)
+  .swiper-pagination-bullet {
+  width: 24px;
+  height: 8px;
+  border-radius: 0;
 }
 </style>

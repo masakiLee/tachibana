@@ -19,7 +19,7 @@ export default {
   <section class="section-Complete bg-darkTwo py-8">
     <div class="container">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-lg-8">
           <div class="bg-dark p-4 information">
             <ul class="step d-flex justify-content-around mb-4">
               <li
@@ -28,15 +28,25 @@ export default {
                 訂單完成
               </li>
             </ul>
-            <div class="complete bg-darkTwo py-4">232</div>
+            <div
+              class="complete bg-darkTwo py-8"
+              data-aos="fade-up"
+              data-aos-delay="600"
+              data-aos-duration="2000"
+            >
+              <img src="../../assets/image/gift.svg" alt="" class="mx-auto" />
+              <p class="text-center pt-4 thanks">
+                感謝購買，商品問題請聯絡客服，也可以關注我們獲得第一手消息。
+              </p>
+            </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4">
           <div class="bg-dark mt-4 mt-md-0 p-4">
             <p class="pb-2 border-bottom border-3">注意事項</p>
             <div class="mt-4">
               <p class="note">
-                <i class="bi bi-info-square"></i>請於購入後1小時內享用完畢。
+                <i class="bi bi-info-square"></i>購入後請盡快食用。
               </p>
               <p class="note">
                 <i class="bi bi-info-square"></i
@@ -67,5 +77,9 @@ export default {
     text-indent: 0px;
     font-size: 20px;
   }
+}
+
+.thanks {
+  word-break: keep-all;
 }
 </style>

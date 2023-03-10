@@ -47,7 +47,7 @@ export default {
           aria-label="breadcrumb"
           class="ms-8 align-self-end d-none d-md-block"
         >
-          <ol class="breadcrumb font-monospace">
+          <ol class="breadcrumb">
             <li class="breadcrumb-item">
               <RouterLink to="/">首頁</RouterLink>
             </li>
@@ -65,6 +65,11 @@ export default {
             <RouterLink
               :to="`product/${products.id}`"
               class="productsList border border-3 bg-dark border-primary h-100 d-flex"
+              data-aos="fade-zoom"
+              data-aos-easing="ease-in"
+              data-aos-delay="300"
+              data-aos-offset="0"
+              data-aos-duration="600"
             >
               <h3 class="p-4 bg-primary">{{ products.title }}</h3>
               <div class="productsImgBox my-auto">
@@ -116,5 +121,29 @@ export default {
 }
 .productsList:hover {
   color: white;
+}
+
+.sushi {
+  width: 100px;
+  height: 100px;
+  border: 8px solid #1b1b1b;
+  border-radius: 4%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: bottom right;
+  animation: roll 1s linear infinite;
+  .circular {
+    height: 50px;
+    width: 50px;
+    background-color: #f25c05;
+    border-radius: 50%;
+  }
+}
+
+@keyframes roll {
+  100% {
+    transform: translateX(-100%) rotateZ(90deg);
+  }
 }
 </style>

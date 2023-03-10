@@ -2,6 +2,7 @@
 import { mapActions, mapState } from "pinia";
 import PageHeader from "../../components/PageHeader.vue";
 import cartStore from "../../stores/cart";
+import Swal from "sweetalert2";
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
 export default {
   data() {
@@ -21,6 +22,16 @@ export default {
           const orderId = res.data.orderId;
           this.$refs.form.resetForm();
           this.$router.push(`/cartPay/${orderId}`);
+          Swal.fire({
+            toast: true,
+            title: `已送出訂單`,
+            icon: "success",
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 1500,
+            background: "#F2ECDD",
+            color: "#F25C05",
+          });
         })
         .catch((err) => {
           alert(err);
@@ -164,6 +175,7 @@ export default {
                   to="products"
                   type="button"
                   class="btn btn-outline-primary d-block btn-lg w-100"
+                  v-if="!carts.length == 0"
                 >
                   繼續購物
                 </RouterLink>
@@ -183,7 +195,7 @@ export default {
         <div class="col-lg-4 order-1 order-lg-2 mb-4 mb-lg-0">
           <div class="bg-dark p-4">
             <p class="cart pb-2 border-bottom border-3">購物車商品</p>
-            <div v-if="carts" class="cart-info">
+            <div v-if="!carts.length == 0" class="cart-info">
               <div
                 v-for="cart in carts"
                 :key="cart.id"
@@ -221,6 +233,7 @@ export default {
                   type="button"
                   class="btn delCart my-auto text-center"
                   @click="deleteCartItem(cart)"
+                  data-swal-toast-template="#my-template"
                 >
                   <i class="bi bi-x-square text-primary"></i>
                 </button>
@@ -258,6 +271,16 @@ export default {
                 <span>總計：</span>
                 <span>NT$ {{ final_total }}</span>
               </div>
+            </div>
+            <div v-else class="p-8">
+              <p class="text-center cartNo">購物車無選購商品，快去選購！</p>
+              <RouterLink
+                to="products"
+                type="button"
+                class="btn btn-outline-primary d-block btn-lg w-100 mt-4"
+              >
+                繼續購物
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -327,5 +350,9 @@ label {
 }
 .form-label {
   margin-bottom: 0;
+}
+
+.cartNo {
+  word-break: keep-all;
 }
 </style>

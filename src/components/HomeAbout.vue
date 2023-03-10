@@ -84,6 +84,7 @@ export default {
   letter-spacing: 12px;
   @media (max-width: 768px) {
     line-height: 48px;
+    letter-spacing: 8px;
   }
 }
 .aboutPicture {

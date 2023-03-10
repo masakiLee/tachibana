@@ -8,6 +8,7 @@ export default {
     return {
       articles: {},
       isLoading: false,
+      fullPage: true,
     };
   },
   methods: {
@@ -36,7 +37,6 @@ export default {
     v-model:active="isLoading"
     :can-cancel="true"
     :color="'#fff'"
-    :on-cancel="onCancel"
     :is-full-page="fullPage"
     :background-color="'#1b1b1b'"
     :opacity="1"
@@ -101,14 +101,14 @@ export default {
 
 <style lang="scss" scoped>
 .loading {
-  animation: animate 1s infinite alternate ease-in;
+  animation: animate 0.6s infinite alternate ease;
 }
 
 @keyframes animate {
   to {
     opacity: 0.08;
-    filter: blur(5px);
-    letter-spacing: 24px;
+    filter: blur(4px);
+    letter-spacing: 16px;
   }
 }
 .loadingName {

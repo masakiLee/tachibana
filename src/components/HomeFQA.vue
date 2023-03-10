@@ -39,7 +39,7 @@ export default {
         <div class="col-12 col-md-8">
           <div class="accordion" id="accordionExampleOne">
             <div
-              class="accordion-item border border-3 border-white mb-6"
+              class="accordion-item border border-3 border-white"
               v-for="question in questions"
               :key="question.id"
             >
@@ -111,5 +111,12 @@ export default {
 .accordion-button.not-collapsed::after {
   background-image: url(../assets/image/minus.svg);
   transform: rotate(180deg);
+}
+
+.accordion-item {
+  margin-bottom: 24px;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 </style>

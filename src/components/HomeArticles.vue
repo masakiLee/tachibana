@@ -101,7 +101,7 @@ export default {
 
 <style lang="scss" scoped>
 .loading {
-  animation: animate 0.6s infinite alternate ease;
+  animation: animate 0.6s ease;
 }
 
 @keyframes animate {
@@ -121,6 +121,7 @@ export default {
   }
 }
 .loadingLesp {
+  font-family: "Courier New", Courier, monospace;
   letter-spacing: 16px;
   font-size: 24px;
   @media (max-width: 576px) {

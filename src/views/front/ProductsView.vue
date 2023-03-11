@@ -65,18 +65,16 @@ export default {
             <RouterLink
               :to="`product/${products.id}`"
               class="productsList border border-3 bg-dark border-primary h-100 d-flex"
-              data-aos="fade-zoom"
-              data-aos-easing="ease-in"
-              data-aos-delay="300"
-              data-aos-offset="0"
-              data-aos-duration="600"
             >
               <h3 class="p-4 bg-primary">{{ products.title }}</h3>
               <div class="productsImgBox my-auto">
                 <img
                   :src="products.imageUrl"
                   :alt="products.title"
-                  class="productsImg p-2"
+                  data-aos="fade-zoom"
+                  data-aos-easing="ease-in"
+                  data-aos-delay="300"
+                  data-aos-offset="0"
                 />
               </div>
             </RouterLink>

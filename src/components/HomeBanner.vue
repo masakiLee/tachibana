@@ -100,6 +100,7 @@ export default {
   letter-spacing: 1rem;
   @media (max-width: 992px) {
     font-size: 16px;
+    line-height: 12px;
     letter-spacing: 8px;
   }
 }

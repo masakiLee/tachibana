@@ -93,7 +93,7 @@ export default {
               </h3>
               <div
                 class="newsPages-coupon bg-dark w-75 p-4 mx-auto"
-                v-if="article.title === '慶開幕輸入折扣碼享折扣'"
+                v-if="article.title === '慶開幕輸入優惠碼享折扣'"
               >
                 <p class="coupon-title mb-2">歡慶開幕</p>
                 <span class="bg-primary text-white p-2 px-4 coupon"

@@ -170,7 +170,7 @@ export default {
     <div class="same mt-4 mt-md-10 bg-dark py-6">
       <div class="container">
         <div class="category-area d-flex">
-          <div class="same-title my-auto p-3">系列料理</div>
+          <div class="same-title px-3 text-center bg-darkTwo">系列料理</div>
           <swiper
             :slidesPerView="3"
             :spaceBetween="10"
@@ -317,6 +317,9 @@ select {
 .category-area {
   position: relative; /* 將父層設為相對定位 */
   height: 182px; /* 設定父層高度，可以根據需要做調整 */
+  @media (max-width: 576px) {
+    height: 158px;
+  }
 }
 
 .swiper {

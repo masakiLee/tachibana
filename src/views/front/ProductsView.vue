@@ -59,7 +59,7 @@ export default {
       </div>
       <div class="products mt-9 mb-8">
         <div
-          class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 g-md-6 text-center"
+          class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 g-md-6 text-center"
         >
           <div class="col" v-for="products in products" :key="products.id">
             <RouterLink
@@ -75,6 +75,7 @@ export default {
                   data-aos-easing="ease-in"
                   data-aos-delay="300"
                   data-aos-offset="0"
+                  class="productsImg"
                 />
               </div>
             </RouterLink>
@@ -110,7 +111,7 @@ export default {
   margin-bottom: 0;
 }
 .productsImg {
-  width: fit-content;
+  width: max-content;
   object-fit: cover;
   transition: 0.6s;
   &:hover {

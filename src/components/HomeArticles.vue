@@ -101,7 +101,7 @@ export default {
 
 <style lang="scss" scoped>
 .loading {
-  animation: animate 0.6s ease;
+  animation: animate 1.5s ease;
 }
 
 @keyframes animate {

@@ -117,32 +117,13 @@ export default {
   &:hover {
     transform: scale(1.1);
   }
+  @media (max-width: 768px) {
+    width: min-content;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+  }
 }
 .productsList:hover {
   color: white;
-}
-
-.sushi {
-  width: 100px;
-  height: 100px;
-  border: 8px solid #1b1b1b;
-  border-radius: 4%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform-origin: bottom right;
-  animation: roll 1s linear infinite;
-  .circular {
-    height: 50px;
-    width: 50px;
-    background-color: #f25c05;
-    border-radius: 50%;
-  }
-}
-
-@keyframes roll {
-  100% {
-    transform: translateX(-100%) rotateZ(90deg);
-  }
 }
 </style>

@@ -18,7 +18,10 @@ export default {
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/article/${id}`)
         .then((res) => {
+          console.log(res.data.article);
+          const content = document.querySelector(".content");
           this.article = res.data.article;
+          content.innerHTML = res.data.article.content;
           this.isLoading = false;
         });
     },
@@ -91,8 +94,9 @@ export default {
               <h3 class="newsPages-text mb-4">
                 {{ article.description }}
               </h3>
+              <div class="content text-start mt-8"></div>
               <div
-                class="newsPages-coupon bg-dark w-75 p-4 mx-auto"
+                class="newsPages-coupon bg-dark w-75 p-4 mx-auto mt-8"
                 v-if="article.title === '慶開幕輸入優惠碼享折扣'"
               >
                 <p class="coupon-title mb-2">歡慶開幕</p>

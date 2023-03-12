@@ -20,7 +20,10 @@ export default {
   },
   methods: {
     getProduct(newId) {
-      this.id = newId || this.$route.params.id;
+      this.id = newId || this.$route.params.id || "";
+      if (!this.id) {
+        return;
+      }
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/product/${this.id}`)
         .then((response) => {

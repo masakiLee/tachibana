@@ -1,9 +1,11 @@
 <script>
 import PageHeader from "../../components/PageHeader.vue";
-import { paymentStore } from "../../stores/payment";
+import paymentStore from "../../stores/payment";
+
 export default {
   beforeRouteEnter(to, from, next) {
-    if (paymentStore.success) {
+    const store = paymentStore(); // 實例化 paymentStore
+    if (store.success) {
       next();
     } else {
       next("/NotFound.vue");

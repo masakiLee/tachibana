@@ -2,7 +2,7 @@
 import { mapActions, mapState } from "pinia";
 import PageHeader from "../../components/PageHeader.vue";
 import cartStore from "../../stores/cart";
-import { paymentStore } from "../../stores/payment";
+import paymentStore from "../../stores/payment";
 import Swal from "sweetalert2";
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
 
@@ -29,6 +29,7 @@ export default {
           this.is_paid = res.data.order.is_paid;
         });
     },
+    ...mapActions(paymentStore, ["setPaymentSuccess"]),
     payOrder() {
       const data = this.order;
       this.$http
@@ -37,7 +38,7 @@ export default {
         })
         .then((res) => {
           if (res.data.success) {
-            paymentStore.setPaymentSuccess(true);
+            this.setPaymentSuccess(true);
             this.$router.push(`/cartComplete`);
           }
           this.getCart();
@@ -62,9 +63,11 @@ export default {
   },
   mounted() {
     this.getOrder();
+    console.log(this.success);
   },
   computed: {
     ...mapState(cartStore, ["carts"]),
+    ...mapState(paymentStore, ["success"]),
   },
 };
 </script>

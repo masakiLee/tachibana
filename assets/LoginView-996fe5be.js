@@ -1,0 +1,1 @@
+import{_ as e,o as s,c as o,b as t}from"./index-7e0cc333.js";const c={},n={class:"about"},a=t("h2",null,"This is an login pages",-1),_=[a];function i(r,d){return s(),o("div",n,_)}const f=e(c,[["render",i]]);export{f as default};

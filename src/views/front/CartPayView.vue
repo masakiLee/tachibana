@@ -2,6 +2,7 @@
 import { mapActions, mapState } from "pinia";
 import PageHeader from "../../components/PageHeader.vue";
 import cartStore from "../../stores/cart";
+import { paymentStore } from "../../stores/payment";
 import Swal from "sweetalert2";
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
 
@@ -35,7 +36,10 @@ export default {
           data,
         })
         .then((res) => {
-          this.$router.push(`/cartComplete`);
+          if (res.data.success) {
+            paymentStore.setPaymentSuccess(true);
+            this.$router.push(`/cartComplete`);
+          }
           this.getCart();
           Swal.fire({
             toast: true,

@@ -1,12 +1,14 @@
 <script>
 import PageHeader from "../../components/PageHeader.vue";
+import { paymentStore } from "../../stores/payment";
 export default {
-  data() {
-    return {
-      article: {},
-    };
+  beforeRouteEnter(to, from, next) {
+    if (paymentStore.success) {
+      next();
+    } else {
+      next("/NotFound.vue");
+    }
   },
-  methods: {},
   components: {
     PageHeader,
   },

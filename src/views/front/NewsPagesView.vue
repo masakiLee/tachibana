@@ -80,23 +80,23 @@ export default {
           </div>
         </loading>
         <div class="col-md-8">
-          <div class="newsPages-main text-center text-white mt-9">
-            <img
-              :src="article.image"
-              alt="newsImg"
-              class="newsPagesImg mx-auto"
-            />
+          <div class="newsPages-main text-white mt-9">
             <div class="newsPages-body">
-              <h2 class="newsPages-title my-3">
-                {{ article.title }}
-              </h2>
-              <p class="card-time text-primary mb-3">{{ article.time }}</p>
-              <h3 class="newsPages-text mb-4">
+              <h3 class="newsPages-text mb-4 text-start">
                 {{ article.description }}
               </h3>
+              <p class="card-time text-primary mb-3 text-end">
+                {{ article.time }}
+              </p>
+              <img
+                :src="article.image"
+                alt="newsImg"
+                class="newsPagesImg mx-auto"
+              />
+
               <div class="content text-start mt-8"></div>
               <div
-                class="newsPages-coupon bg-dark w-75 p-4 mx-auto mt-8"
+                class="newsPages-coupon bg-dark w-75 p-4 mx-auto mt-8 text-center"
                 v-if="article.title === '慶開幕輸入優惠碼享折扣'"
               >
                 <p class="coupon-title mb-2">歡慶開幕</p>
@@ -146,7 +146,7 @@ export default {
 }
 
 .newsPages-body {
-  padding: 24px 12px 0 12px;
+  padding: 0 12px;
 
   @media (max-width: 768px) {
     padding: 24px 8px 0 8px;

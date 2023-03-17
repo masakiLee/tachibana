@@ -87,7 +87,7 @@ export default {
             </li>
             ｜
             <li class="text-primary px-0 ps-xl-3">
-              <RouterLink to="/">後台登入</RouterLink>
+              <RouterLink to="/logIn">後台登入</RouterLink>
             </li>
           </ul>
           <a

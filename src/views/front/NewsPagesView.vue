@@ -9,6 +9,7 @@ export default {
       article: {},
       isLoading: false,
       fullPage: false,
+      coupons: [],
     };
   },
   methods: {
@@ -19,10 +20,22 @@ export default {
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/article/${id}`)
         .then((res) => {
           console.log(res.data.article);
-          const content = document.querySelector(".content");
           this.article = res.data.article;
-          content.innerHTML = res.data.article.content;
+          const time = res.data.article.create_at;
+          const date = new Date(time * 1000);
+          const dateString = date.toLocaleDateString();
+          this.article.dateString = dateString;
           this.isLoading = false;
+        });
+    },
+    getCoupon() {
+      this.$http
+        .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/coupons`)
+        .then((res) => {
+          this.coupons = res.data.coupons;
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
   },
@@ -86,7 +99,7 @@ export default {
                 {{ article.description }}
               </h3>
               <p class="card-time text-primary mb-3 text-end">
-                {{ article.time }}
+                {{ article.dateString }}
               </p>
               <img
                 :src="article.image"
@@ -94,19 +107,29 @@ export default {
                 class="newsPagesImg mx-auto"
               />
 
-              <div class="content text-start mt-8"></div>
+              <div class="text-start my-6" v-html="article.content"></div>
               <div
-                class="newsPages-coupon bg-dark w-75 p-4 mx-auto mt-8 text-center"
-                v-if="article.title === '慶開幕輸入優惠碼享折扣'"
+                class="coupon-card border border-dark border-3 text-center row g-0"
               >
-                <p class="coupon-title mb-2">歡慶開幕</p>
-                <span class="bg-primary text-white p-2 px-4 coupon"
-                  >OPENSUSHI</span
+                <div
+                  class="new col-md-4 d-flex justify-content-center align-items-center"
                 >
-                <p class="coupon-text my-2">結帳時輸入優惠碼單筆折扣8折</p>
-                <p class="coupon-time">
-                  使用期限：<span>2023-03-26 ~ 2023-04-26</span>
-                </p>
+                  <img
+                    src="../../assets/image/confetti.svg"
+                    alt="confetti"
+                    class="confetti"
+                  />
+                </div>
+                <div class="body col-md-8">
+                  <p class="p-3 bg-primary text-white">歡慶開幕</p>
+                  <p class="title p-3 bg-dark">OPENSUSHI</p>
+                  <p class="p-3 bg-dark">
+                    折扣
+                    <span class="percent text-primary">80</span>
+                    %
+                  </p>
+                  <p class="pb-3 bg-dark">2023-03-26 ~ 2023-04-26</p>
+                </div>
               </div>
               <p class="text-end text-white mt-8">{{ article.author }}</p>
             </div>
@@ -157,8 +180,18 @@ export default {
   font-size: 12px;
 }
 
-.newsPages-title {
+.confetti {
+  width: 180px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+.title {
   font-size: 24px;
+  line-height: 1;
+}
+.percent {
+  font-size: 32px;
+  line-height: 1;
 }
 
 .newsPages-text {

@@ -16,6 +16,16 @@ export default {
         .then((res) => {
           this.articles = res.data.articles;
           this.page = res.data.pagination;
+          //時間搓轉換時間
+          this.articles = res.data.articles.map((item) => {
+            const time = item.create_at;
+            const date = new Date(time * 1000);
+            const dateString = date.toLocaleDateString();
+            return {
+              ...item,
+              dateString, // 新增 dateString 屬性
+            };
+          });
         });
     },
   },
@@ -87,7 +97,7 @@ export default {
                     {{ article.description }}
                   </h3>
                   <p class="card-time text-primary text-end">
-                    {{ article.time }}
+                    {{ article.dateString }}
                   </p>
                 </div>
               </div>

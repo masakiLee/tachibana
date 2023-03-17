@@ -70,7 +70,8 @@ const cartStore = defineStore("cart", {
         .put(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart/${cart.id}`, {
           data,
         })
-        .then((res) => {
+        // eslint-disable-next-line no-unused-vars
+        .then((_res) => {
           const name = cart.product.title;
           this.getCart();
           Swal.fire({
@@ -115,7 +116,8 @@ const cartStore = defineStore("cart", {
           if (result.isConfirmed) {
             axios
               .delete(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart/${cart.id}`)
-              .then((res) => {
+              // eslint-disable-next-line no-unused-vars
+              .then((_res) => {
                 this.getCart();
                 Swal.fire({
                   toast: true,
@@ -154,7 +156,8 @@ const cartStore = defineStore("cart", {
             color: "#F25C05",
           });
         })
-        .catch((err) => {
+        // eslint-disable-next-line no-unused-vars
+        .catch((_err) => {
           Swal.fire({
             toast: true,
             title: `<span style="color: #ff0000">優惠代碼錯誤</span>`,

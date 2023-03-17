@@ -40,12 +40,38 @@ const router = createRouter({
           component: () => import("../views/front/CartCompleteView.vue"),
         },
         {
-          path: "login",
-          component: () => import("../views/front/LoginView.vue"),
-        },
-        {
           path: "/:pathMatch(.*)*",
           component: () => import("../views/front/NotFound.vue"),
+        },
+      ],
+    },
+    {
+      path: "/logIn",
+      component: () => import("../views/DashBoradView.vue"),
+    },
+    {
+      path: "/admin",
+      component: () => import("../views/admin/AdminView.vue"),
+      children: [
+        {
+          path: "index",
+          component: () => import("../views/admin/AdminIndexView.vue"),
+        },
+        {
+          path: "products",
+          component: () => import("../views/admin/AdminProductView.vue"),
+        },
+        {
+          path: "article",
+          component: () => import("../views/admin/AdminArticleView.vue"),
+        },
+        {
+          path: "order",
+          component: () => import("../views/admin/AdminOrderView.vue"),
+        },
+        {
+          path: "coupon",
+          component: () => import("../views/admin/AdminCouponView.vue"),
         },
       ],
     },

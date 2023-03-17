@@ -6,7 +6,7 @@ import "vue-loading-overlay/dist/css/index.css";
 export default {
   data() {
     return {
-      articles: {},
+      articles: [],
       isLoading: false,
       fullPage: true,
     };
@@ -16,8 +16,19 @@ export default {
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/articles`)
         .then((res) => {
-          this.articles = res.data.articles[0];
+          this.articles = res.data.articles;
           this.isLoading = false;
+          //時間搓轉換時間
+          this.articles = res.data.articles.map((item) => {
+            const time = item.create_at;
+            const date = new Date(time * 1000);
+            const dateString = date.toLocaleDateString();
+            return {
+              ...item,
+              dateString, // 新增 dateString 屬性
+            };
+          });
+          this.articles = this.articles[0];
         });
     },
   },
@@ -79,7 +90,7 @@ export default {
                   </div>
                 </div>
                 <span class="time font-monospace my-3">{{
-                  articles.time
+                  articles.dateString
                 }}</span>
                 <h3 class="articles-title">{{ articles.title }}</h3>
                 <p class="articles-description my-2">

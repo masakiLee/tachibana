@@ -71,7 +71,7 @@ export default {
   <PageHeader></PageHeader>
   <section class="section-product bg-darkTwo py-8">
     <div class="container">
-      <div class="d-flex">
+      <div class="d-flex flex-wrap">
         <div
           class="square bg-darkTwo border border-primary border-3 mx-auto mx-md-0"
         >
@@ -83,7 +83,7 @@ export default {
         </div>
         <nav
           aria-label="breadcrumb"
-          class="ms-8 align-self-end d-none d-md-block"
+          class="ms-7 ms-md-8 align-self-end mt-8 mt-md-0"
         >
           <ol class="breadcrumb text-nowrap">
             <li class="breadcrumb-item">
@@ -99,7 +99,7 @@ export default {
         </nav>
       </div>
     </div>
-    <div class="product mt-9 mb-8 bg-dark">
+    <div class="product mt-7 mt-sm-9 mb-8 bg-dark">
       <div class="container">
         <div class="row pb-4 pb-md-0">
           <div class="col-lg-6">

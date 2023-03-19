@@ -7,17 +7,34 @@ export default {
     return {
       products: [],
       page: {},
+      currentCategory: "all",
     };
   },
   methods: {
     getProducts(page = 1) {
+      const category =
+        this.currentCategory === "all"
+          ? ""
+          : `&category=${this.currentCategory}`;
       //page = 1 預設參數
       this.$http
-        .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/products/?page=${page}`)
+        .get(
+          `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/products/?page=${page}&${category}`
+        )
         .then((res) => {
           this.products = res.data.products;
           this.page = res.data.pagination;
+          this.$router.push({
+            query: {
+              page: this.page.current_page,
+              category: this.currentCategory,
+            },
+          });
         });
+    },
+    selectCategory(category) {
+      this.currentCategory = category;
+      this.getProducts();
     },
   },
   components: {
@@ -26,6 +43,14 @@ export default {
   },
   mounted() {
     this.getProducts();
+    const category =
+      this.currentCategory === "all"
+        ? "all"
+        : `&category=${this.currentCategory}`;
+    this.$router.push({
+      path: "/products",
+      query: { page: 1, category: category },
+    });
   },
 };
 </script>
@@ -58,6 +83,32 @@ export default {
         </nav>
       </div>
       <div class="products mt-9 mb-8">
+        <nav class="nav nav-pills flex-column flex-sm-row mb-6">
+          <a
+            class="flex-sm-fill text-sm-center nav-link"
+            :class="{ active: currentCategory === 'all' }"
+            @click="selectCategory('all')"
+            >全部</a
+          >
+          <a
+            class="flex-sm-fill text-sm-center nav-link"
+            :class="{ active: currentCategory === '握壽司' }"
+            @click="selectCategory('握壽司')"
+            >握壽司</a
+          >
+          <a
+            class="flex-sm-fill text-sm-center nav-link"
+            :class="{ active: currentCategory === '卷物' }"
+            @click="selectCategory('卷物')"
+            >卷物</a
+          >
+          <a
+            class="flex-sm-fill text-sm-center nav-link"
+            :class="{ active: currentCategory === '軍艦' }"
+            @click="selectCategory('軍艦')"
+            >軍艦</a
+          >
+        </nav>
         <div
           class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 g-md-6 text-center"
         >
@@ -110,6 +161,13 @@ export default {
 .breadcrumb {
   margin-bottom: 0;
 }
+
+.nav-link {
+  background-color: #1b1b1b;
+  cursor: pointer;
+  color: white;
+}
+
 .productsImg {
   width: max-content;
   object-fit: cover;

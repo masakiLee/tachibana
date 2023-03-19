@@ -105,7 +105,7 @@ export default {
                 type="submit"
                 class="btn btn-primary text-white d-block btn-lg w-100"
               >
-                送出訂單
+                送出
               </button>
             </div>
           </v-form>

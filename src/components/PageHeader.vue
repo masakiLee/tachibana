@@ -1,15 +1,8 @@
-<script>
-export default {
-  data() {
-    return {};
-  },
-};
-</script>
 <template>
   <div class="header bg-dark">
     <RouterLink to="/" class="logo text-center">
       <h1 class="logoName">TACHIBANA</h1>
-      <p class="lesp">SUSHI</p>
+      <p class="subtitle">SUSHI</p>
     </RouterLink>
   </div>
 </template>
@@ -27,7 +20,7 @@ export default {
     line-height: 1;
   }
 }
-.lesp {
+.subtitle {
   font-family: "Courier New", Courier, monospace;
   letter-spacing: 4px;
   line-height: 24px;

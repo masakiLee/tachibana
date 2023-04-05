@@ -1,39 +1,39 @@
 <script>
-import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js'
+
 export default {
-  props: ["isNew", "coupon"],
-  emits: ["update-coupon"],
-  data() {
+  props: ['isNew', 'coupon'],
+  emits: ['update-coupon'],
+  data () {
     return {
-      couponModal: "",
+      couponModal: '',
       tempCoupon: {},
-      due_date: "",
-    };
+      due_date: ''
+    }
   },
   methods: {},
-  mounted() {
+  mounted () {
     this.couponModal = new bootstrap.Modal(
       this.$refs.couponModal,
-      //options 不能使用 esc 關閉
       {
-        keyboard: false,
+        keyboard: false
       }
-    );
+    )
   },
   watch: {
-    coupon() {
-      this.tempCoupon = this.coupon;
+    coupon () {
+      this.tempCoupon = this.coupon
       // 將時間格式改為 YYYY-MM-DD
       const dateAndTime = new Date(this.tempCoupon.due_date * 1000)
         .toISOString()
-        .split("T");
-      [this.due_date] = dateAndTime;
+        .split('T');
+      [this.due_date] = dateAndTime
     },
-    due_date() {
-      this.tempCoupon.due_date = Math.floor(new Date(this.due_date) / 1000);
-    },
-  },
-};
+    due_date () {
+      this.tempCoupon.due_date = Math.floor(new Date(this.due_date) / 1000)
+    }
+  }
+}
 </script>
 
 <template>
@@ -87,6 +87,7 @@ export default {
               class="form-control"
               id="price"
               min="0"
+              max="100"
               placeholder="請輸入折扣百分比"
               v-model.number="tempCoupon.percent"
             />

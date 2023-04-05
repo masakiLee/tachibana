@@ -1,25 +1,25 @@
 <script>
-import { mapActions, mapState } from "pinia";
-import cartStore from "../stores/cart";
+import { mapActions, mapState } from 'pinia'
+import cartStore from '@/stores/cart'
 
 export default {
-  data() {
-    return {};
+  data () {
+    return {}
   },
   methods: {
-    toggleNavToggler() {
-      const navToggler = document.querySelector("#nav-toggler");
-      navToggler.checked = false;
+    toggleNavToggler () {
+      const navToggler = document.querySelector('#nav-toggler')
+      navToggler.checked = false
     },
-    ...mapActions(cartStore, ["getCart"]), //購物車列表
+    ...mapActions(cartStore, ['getCart']) // 購物車列表
   },
   computed: {
-    ...mapState(cartStore, ["carts"]),
+    ...mapState(cartStore, ['carts'])
   },
-  mounted() {
-    this.getCart();
-  },
-};
+  mounted () {
+    this.getCart()
+  }
+}
 </script>
 
 <template>
@@ -35,7 +35,7 @@ export default {
       <RouterLink to="/products" class="navList" @click="toggleNavToggler"
         >逸品料理</RouterLink
       >
-      <RouterLink to="/cart" class="navList" @click="toggleNavToggler"
+      <RouterLink to="/shoppingCart" class="navList" @click="toggleNavToggler"
         >購物車</RouterLink
       >
     </nav>
@@ -44,20 +44,21 @@ export default {
       <span class="hamburgerLine"></span>
       <span class="hamburgerLine"></span>
     </label>
-    <RouterLink to="/cart">
+    <RouterLink to="/shoppingCart">
       <button type="button" class="shoppingBtn position-relative border-0">
         <img
           src="../assets/image/shopping.svg"
           alt="購物車"
           class="shoppingCar mx-auto"
+          title="shoppingCar"
         />
-        <span class="badge bg-danger position-absolute rounded-pill">{{
+        <span v-if="carts.length" class="badge bg-danger position-absolute rounded-pill">{{
           carts.length
         }}</span>
       </button>
     </RouterLink>
   </header>
-  <RouterView></RouterView>
+  <RouterView />
   <footer class="bg-dark footer">
     <div class="container">
       <div class="py-8 row">
@@ -65,7 +66,7 @@ export default {
           <div class="logo">
             <img src="../assets/image/logo-sm.svg" alt="logo" />
             <p class="logoName">TACHIBANA</p>
-            <p class="lesp">SUSHI</p>
+            <p class="subtitle">SUSHI</p>
           </div>
         </div>
         <div
@@ -122,7 +123,10 @@ export default {
     display: none;
   }
   #nav-toggler:checked ~ .nav {
-    left: 0;
+    visibility:visible;
+    opacity:1;
+    top: 0;
+    right: 0;
   }
   #nav-toggler:checked ~ .hamburgerBtn .hamburgerLine:nth-child(1) {
     transform: rotate(45deg);
@@ -136,7 +140,7 @@ export default {
   #nav-toggler:checked ~ .hamburgerBtn .hamburgerLine:nth-child(3) {
     transform: rotate(-45deg);
     transition: top 0.5s, transform 0.5s 0.5s;
-    background-color: #f25c05;
+    background-color: rgb(242, 92, 5);
   }
   .nav {
     position: fixed;
@@ -147,8 +151,10 @@ export default {
     align-items: center;
     justify-content: center;
     background-color: #1b1b1b;
-    transition: 1s left;
-    left: -110%;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    visibility:hidden;
+
     .navList {
       font-size: 32px;
       font-weight: 700;
@@ -228,7 +234,7 @@ export default {
     font-size: 24px;
     text-align: center;
   }
-  .lesp {
+  .subtitle {
     font-family: "Courier New", Courier, monospace;
     line-height: 1;
     font-size: 16px;

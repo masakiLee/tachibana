@@ -1,29 +1,29 @@
 <script>
-import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js'
+
 export default {
-  props: ["order"],
-  emits: ["update-paid"],
-  data() {
+  props: ['order'],
+  emits: ['update-paid'],
+  data () {
     return {
-      tempOrder: {},
-    };
+      tempOrder: {}
+    }
   },
   methods: {},
-  mounted() {
+  mounted () {
     this.orderModal = new bootstrap.Modal(
       this.$refs.orderModal,
-      //options 不能使用 esc 關閉
       {
-        keyboard: false,
+        keyboard: false
       }
-    );
+    )
   },
   watch: {
-    order() {
-      this.tempOrder = this.order;
-    },
-  },
-};
+    order () {
+      this.tempOrder = this.order
+    }
+  }
+}
 </script>
 
 <template>
@@ -72,7 +72,7 @@ export default {
                   {{ item.product.title }}
                 </th>
                 <td>{{ item.qty }} / {{ item.product.unit }}</td>
-                <td class="text-end">NT$ {{ item.final_total }}</td>
+                <td class="text-end">NT$ {{ (item.final_total).toLocaleString("zh-TW") }}</td>
               </tr>
             </tbody>
           </table>
@@ -81,7 +81,6 @@ export default {
               <input
                 class="form-check-input"
                 type="checkbox"
-                value=""
                 id="flexCheckDefault"
                 v-model="tempOrder.is_paid"
               />

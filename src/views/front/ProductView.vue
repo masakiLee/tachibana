@@ -1,74 +1,96 @@
 <script>
-import { mapActions } from "pinia";
-import PageHeader from "../../components/PageHeader.vue";
-import cartStore from "../../stores/cart";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { Pagination } from "swiper";
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
+import { mapActions } from 'pinia'
+import PageHeader from '@/components/PageHeader.vue'
+import cartStore from '@/stores/cart'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Pagination } from 'swiper'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import Swal from 'sweetalert2'
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
-  data() {
+  data () {
     return {
       product: {},
       sameCategory: [],
-      id: "",
+      id: '',
       qty: 1,
-      modules: [Pagination],
-    };
+      modules: [Pagination]
+    }
   },
   methods: {
-    getProduct(newId) {
-      this.id = newId || this.$route.params.id || "";
+    getProduct (newId) {
+      this.id = newId || this.$route.params.id || ''
       if (!this.id) {
-        return;
+        return
       }
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/product/${this.id}`)
         .then((response) => {
-          this.product = response.data.product;
-          this.getCategoryProducts();
-        });
+          this.product = response.data.product
+          this.getCategoryProducts()
+        })
+        .catch(() => {
+          Swal.fire({
+            toast: true,
+            title: '<span style="color: #ff0000">獲取商品失敗</span>',
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
     },
-    getCategoryProducts() {
-      const { category } = this.product;
-      this.sameCategory = [];
+    getCategoryProducts () {
+      const { category } = this.product
+      this.sameCategory = []
       this.$http
         .get(
           `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/products?category=${category}`
         )
         .then((response) => {
           response.data.products.forEach((item) => {
-            if (item.id === this.id) {
-              return;
-            } else {
-              this.sameCategory.push(item);
+            if (item.id !== this.id) {
+              this.sameCategory.push(item)
             }
-          });
-        });
+          })
+        })
+        .catch(() => {
+          Swal.fire({
+            toast: true,
+            title: '<span style="color: #ff0000">獲取同系列商品失敗</span>',
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
     },
-    ...mapActions(cartStore, ["addToCart"]),
+    ...mapActions(cartStore, ['addToCart'])
   },
   components: {
     PageHeader,
     Swiper,
-    SwiperSlide,
+    SwiperSlide
   },
-  mounted() {
-    this.getProduct();
+  mounted () {
+    this.getProduct()
   },
   watch: {
-    $route() {
-      const newId = this.$route.params.id;
-      this.getProduct(newId);
-    },
-  },
-};
+    $route () {
+      const newId = this.$route.params.id
+      this.getProduct(newId)
+    }
+  }
+}
 </script>
 
 <template>
-  <PageHeader></PageHeader>
+  <PageHeader />
   <section class="section-product bg-darkTwo py-8">
     <div class="container">
       <div class="d-flex flex-wrap">
@@ -123,7 +145,7 @@ export default {
                 class="about w-100 px-4 px-md-8 py-0 d-flex flex-column justify-content-between"
               >
                 <span
-                  class="category py-1 px-3 bg-darkTwo text-primary border border-white border-1 align-self-start"
+                  class="category py-1 px-3 bg-danger align-self-start"
                   >{{ product.category }}</span
                 >
                 <p class="description pt-3 pt-md-0">
@@ -138,19 +160,19 @@ export default {
                   <select
                     name=""
                     id=""
-                    class="form-select w-25 ps-3"
+                    class="form-select w-25 ps-3 flex-fill"
                     v-model="qty"
                   >
                     <option v-for="i in 20" :value="i" :key="i">{{ i }}</option>
                   </select>
-                  <button
-                    class="btn btn-primary addCart w-50 text-white ms-4"
+                  <button type="button"
+                    class="btn btn-primary addCart w-50 text-white ms-4 flex-fill"
                     @click="addToCart(product.id, qty)"
                   >
                     加入購物車
                   </button>
                 </div>
-                <p class="font-monospace note pt-3 pt-md-0">
+                <p class="note pt-3 pt-md-0">
                   ※
                   注意：本商品含有蟹、蝦、魚類、大豆、麩質之穀物(小麥)及其製品可能導致過敏症狀
                   ※
@@ -253,27 +275,24 @@ export default {
 .title {
   writing-mode: vertical-lr;
   letter-spacing: 12px;
+}
+
+.title,.price {
   font-size: 32px;
-}
-.category {
-  font-size: 20px;
-}
-.description {
-  font-size: 20px;
-}
-.price {
-  font-size: 32px;
+    @media (max-width: 576px) {
+    font-size: 24px;
+  }
 }
 .unit {
   font-size: 20px;
 }
+
 select {
   font-size: 24px;
   padding: 4px 0;
   vertical-align: middle;
 }
 .addCart {
-  font-size: 20px;
   @media (max-width: 576px) {
     font-size: 16px;
   }
@@ -292,7 +311,6 @@ select {
 
 .same-title {
   writing-mode: vertical-lr;
-  font-size: 24px;
   letter-spacing: 4px;
 }
 .categoryImg {
@@ -303,23 +321,22 @@ select {
   background-color: #222222;
   cursor: pointer;
 }
-.form-select {
-  @media (max-width: 576px) {
-    font-size: 16px;
-  }
-}
+
 .form-select:focus {
   box-shadow: none;
 }
-.note {
+.form-select {
   @media (max-width: 768px) {
     font-size: 16px;
   }
 }
+.note {
+  font-size: 12px;
+}
 
 .category-area {
-  position: relative; /* 將父層設為相對定位 */
-  height: 182px; /* 設定父層高度，可以根據需要做調整 */
+  position: relative;
+  height: 182px;
   @media (max-width: 576px) {
     height: 158px;
   }
@@ -332,7 +349,6 @@ select {
 }
 
 .swiper-slide {
-  // padding-bottom: 32px;
   padding: 8px 16px 32px;
   @media (max-width: 576px) {
     padding: 0 0 24px;

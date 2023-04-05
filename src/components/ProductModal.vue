@@ -1,73 +1,62 @@
 <script>
-const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
-import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js'
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
+
 export default {
-  props: ["isNew", "product", "createImages"],
-  emit: ["create-images", "update-product"],
-  data() {
+  props: ['isNew', 'product', 'createImages'],
+  emit: ['create-images', 'update-product'],
+  data () {
     return {
       status: {},
-      tempProduct: "",
-    };
+      tempProduct: ''
+    }
   },
   methods: {
-    uploadFile() {
-      const uploadedFile = this.$refs.fileInput.files[0];
-      const formData = new FormData();
-      formData.append("file-to-upload", uploadedFile);
-      const url = `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/upload`;
-      this.status.fileUploading = true;
+    uploadFile () {
+      const uploadedFile = this.$refs.fileInput.files[0]
+      const formData = new FormData()
+      formData.append('file-to-upload', uploadedFile)
+      const url = `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/upload`
+      this.status.fileUploading = true
       this.$http
         .post(url, formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
-          },
+            'Content-Type': 'multipart/form-data'
+          }
         })
         .then((response) => {
-          this.status.fileUploading = false;
+          this.status.fileUploading = false
           if (response.data.success) {
-            this.tempProduct.imageUrl = response.data.imageUrl;
-            this.$refs.fileInput.value = "";
-            alert("圖片上傳成功");
-            // this.emitter.emit("push-message", {
-            //   style: "success",
-            //   title: "圖片上傳結果",
-            //   content: response.data.message,
-            // });
-            // 改 sweetAlert
+            this.tempProduct.imageUrl = response.data.imageUrl
+            this.$refs.fileInput.value = ''
+            alert('圖片上傳成功')
           } else {
-            this.$refs.fileInput.value = "";
-            alert("圖片上傳失敗");
-            // this.emitter.emit("push-message", {
-            //   style: "danger",
-            //   title: "圖片上傳結果",
-            //   content: response.data.message,
-            // });
-            // 改 sweetAlert
+            this.$refs.fileInput.value = ''
+            alert('圖片上傳失敗')
           }
         })
         .catch((error) => {
-          this.status.fileUploading = false;
-          alert(error.response, "圖片失敗");
-        });
-    },
+          this.status.fileUploading = false
+          alert(error.response, '圖片失敗')
+        })
+    }
   },
-  mounted() {
+  mounted () {
     this.productModal = new bootstrap.Modal(
       this.$refs.productModal,
-      //options 不能使用 esc 關閉
       {
-        keyboard: false,
+        keyboard: false
       }
-    );
+    )
   },
   watch: {
-    product() {
-      this.tempProduct = this.product;
-    },
-  },
-};
+    product () {
+      this.tempProduct = this.product
+    }
+  }
+}
 </script>
+
 <template>
   <div class="modal fade" tabindex="-1" ref="productModal">
     <div
@@ -87,7 +76,7 @@ export default {
         <div class="modal-body text-dark">
           <div class="row gx-2 mb-3">
             <div class="col-md-6">
-              <img class="img-fluid" :src="tempProduct.imageUrl" />
+              <img class="img-fluid" :src="tempProduct.imageUrl" :alt="tempProduct.title"/>
             </div>
             <div class="col-md-6">
               <div class="mb-3">
@@ -170,16 +159,13 @@ export default {
           </div>
           <div class="mt-5">
             <p>內頁商品圖</p>
-            <!-- 首先要確認 tempProduct.imagesUrl 是不是個陣列(裡面有沒有多張圖) -->
             <div v-if="Array.isArray(tempProduct.imagesUrl)">
-              <!-- 如果是個陣列就印出圖片 -->
               <div
                 class="mb-1"
                 v-for="(image, key) in tempProduct.imagesUrl"
                 :key="key"
               >
                 <div class="mb-3">
-                  <!-- 印出網址 -->
                   <input
                     type="text"
                     class="form-control"
@@ -187,8 +173,7 @@ export default {
                     v-model="tempProduct.imagesUrl[key]"
                   />
                 </div>
-                <!-- 印出照片 -->
-                <img class="img-fluid" :src="image" />
+                <img class="img-fluid" :src="image" :alt="tempProduct.title"/>
               </div>
               <div
                 v-if="
@@ -212,9 +197,7 @@ export default {
                 </button>
               </div>
             </div>
-            <!-- 此else為 新增商品的modal -->
             <div v-else>
-              <!-- 當點擊後，會將tempProduct 物件的 imagesUrl 屬性設置為一個包含一個空字串元素的陣列再把照片從最後加入。 -->
               <button
                 class="btn btn-outline-primary btn-sm d-block w-100"
                 @click="$emit('create-images', tempProduct)"

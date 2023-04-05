@@ -1,70 +1,108 @@
 <script>
-const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
+import Swal from 'sweetalert2'
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
+
 export default {
-  data() {
+  data () {
     return {
-      productLength: "",
-      orderLength: "",
-      articleLength: "",
-      couponLength: "",
-    };
+      productLength: '',
+      orderLength: '',
+      articleLength: '',
+      couponLength: ''
+    }
   },
   components: {},
   methods: {
-    getProducts() {
+    getProducts () {
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/products/all`)
         .then((res) => {
-          const data = res.data.products;
-          this.productLength = Object.keys(data).length;
+          const data = res.data.products
+          this.productLength = Object.keys(data).length
         })
         .catch((err) => {
-          console.log(err);
-        });
+          Swal.fire({
+            toast: true,
+            title: `${err.response.data.message}`,
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
     },
-    getOrder() {
+    getOrder () {
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/orders`)
         .then((res) => {
-          this.orderLength = res.data.orders.length;
+          this.orderLength = res.data.orders.length
         })
         .catch((err) => {
-          console.log(err);
-        });
+          Swal.fire({
+            toast: true,
+            title: `${err.response.data.message}`,
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
     },
-    getArticles() {
+    getArticles () {
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/articles`)
         .then((res) => {
-          this.articleLength = res.data.articles.length;
+          this.articleLength = res.data.articles.length
         })
         .catch((err) => {
-          console.log(err.response);
-        });
+          Swal.fire({
+            toast: true,
+            title: `${err.response.data.message}`,
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
     },
-    getCoupon() {
+    getCoupon () {
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/coupons`)
         .then((res) => {
-          this.couponLength = res.data.coupons.length;
+          this.couponLength = res.data.coupons.length
         })
         .catch((err) => {
-          console.log(err);
-        });
-    },
+          Swal.fire({
+            toast: true,
+            title: `${err.response.data.message}`,
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
+    }
   },
-  mounted() {
+  mounted () {
     const token = document.cookie.replace(
       /(?:(?:^|.*;\s*)LoginToken\s*=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-    this.$http.defaults.headers.common.Authorization = `${token}`;
-    this.getProducts();
-    this.getOrder();
-    this.getArticles();
-    this.getCoupon();
-  },
-};
+      '$1'
+    )
+    this.$http.defaults.headers.common.Authorization = `${token}`
+    this.getProducts()
+    this.getOrder()
+    this.getArticles()
+    this.getCoupon()
+  }
+}
 </script>
 
 <template>

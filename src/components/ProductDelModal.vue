@@ -1,22 +1,22 @@
 <script>
-import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js'
+
 export default {
-  props: ["productData"],
-  emits: ["del-item"],
-  data() {
-    return {};
+  props: ['productData'],
+  emits: ['del-item'],
+  data () {
+    return {}
   },
   methods: {},
-  mounted() {
+  mounted () {
     this.productDelModal = new bootstrap.Modal(
       this.$refs.productDelModal,
-      //options 不能使用 esc 關閉
       {
-        keyboard: false,
+        keyboard: false
       }
-    );
-  },
-};
+    )
+  }
+}
 </script>
 
 <template>

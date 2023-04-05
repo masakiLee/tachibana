@@ -1,102 +1,158 @@
 <script>
-const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
-import PaginationType from "../../components/PaginationType.vue";
-import OrderModal from "../../components/OrderModal.vue";
-import OrderDelModal from "../../components/OrderDelModal.vue";
+import PaginationType from '@/components/PaginationType.vue'
+import OrderModal from '@/components/OrderModal.vue'
+import OrderDelModal from '@/components/OrderDelModal.vue'
+import Swal from 'sweetalert2'
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
+
 export default {
-  data() {
+  data () {
     return {
-      //先放get到的優惠券
       orders: [],
       page: {},
-      //暫存的優惠券
       tempOrder: {},
-      isNew: false,
-    };
+      isNew: false
+    }
   },
   components: {
     OrderModal,
     OrderDelModal,
-    PaginationType,
+    PaginationType
   },
   methods: {
-    getOrder(page = 1) {
+    getOrder (page = 1) {
       this.$http
         .get(
           `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/orders/?page=${page}`
         )
         .then((res) => {
-          console.log(res.data.orders);
-          this.orders = res.data.orders;
-          this.page = res.data.pagination;
-          //時間搓轉換時間
+          this.orders = res.data.orders
+          this.page = res.data.pagination
+          // 時間搓轉換時間
           this.orders = res.data.orders.map((item) => {
-            const time = item.create_at;
-            const date = new Date(time * 1000);
-            const dateString = date.toLocaleDateString();
+            const time = item.create_at
+            const date = new Date(time * 1000)
+            const dateString = date.toLocaleDateString()
             return {
               ...item,
-              dateString, // 新增 dateString 屬性
-            };
-          });
+              dateString // 新增 dateString 屬性
+            }
+          })
+          if (res.data.success) {
+            Swal.fire({
+              toast: true,
+              title: '取得訂單成功',
+              icon: 'success',
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 1500,
+              background: '#F2ECDD',
+              color: '#F25C05'
+            })
+          }
         })
         .catch((err) => {
-          console.log(err);
-        });
+          Swal.fire({
+            toast: true,
+            title: `${err.response.data.message}`,
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
     },
-    //打開
-    openModal(type, item) {
-      if (type === "edit") {
-        //修改
-        this.tempOrder = { ...item };
-        this.$refs.modal.orderModal.show();
-      } else if (type === "delete") {
-        //刪除
-        this.tempOrder = { ...item };
-        this.$refs.delModal.orderDelModal.show();
+    // 打開
+    openModal (type, item) {
+      if (type === 'edit') {
+        // 修改
+        this.tempOrder = { ...item }
+        this.$refs.modal.orderModal.show()
+      } else if (type === 'delete') {
+        // 刪除
+        this.tempOrder = { ...item }
+        this.$refs.delModal.orderDelModal.show()
       }
     },
-    //修改付款狀態
-    updatePaid(item) {
-      const api = `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/order/${item.id}`;
+    // 修改付款狀態
+    updatePaid (item) {
+      const api = `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/order/${item.id}`
       const paid = {
-        is_paid: item.is_paid,
-      };
+        is_paid: item.is_paid
+      }
       this.$http
         .put(api, { data: paid })
         .then((res) => {
-          alert(res.data.message);
-          this.$refs.modal.orderModal.hide();
-          this.getOrder();
+          this.$refs.modal.orderModal.hide()
+          this.getOrder()
+          Swal.fire({
+            toast: true,
+            title: `${res.data.message}`,
+            icon: 'success',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#F25C05'
+          })
         })
         .catch((err) => {
-          console.log(err);
-        });
+          Swal.fire({
+            toast: true,
+            title: `${err.response.data.message}`,
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
     },
-    //刪除訂單
-    delOrder() {
-      const url = `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/order/${this.tempOrder.id}`;
+    // 刪除訂單
+    delOrder () {
+      const url = `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/order/${this.tempOrder.id}`
       this.$http
         .delete(url)
         .then((res) => {
-          alert(res.data.message);
-          this.$refs.delModal.orderDelModal.hide();
-          this.getOrder();
+          this.$refs.delModal.orderDelModal.hide()
+          this.getOrder()
+          Swal.fire({
+            toast: true,
+            title: `${res.data.message}`,
+            icon: 'success',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#F25C05'
+          })
         })
         .catch((err) => {
-          alert(err);
-        });
-    },
+          Swal.fire({
+            toast: true,
+            title: `${err.response.data.message}`,
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
+    }
   },
-  mounted() {
+  mounted () {
     const token = document.cookie.replace(
       /(?:(?:^|.*;\s*)LoginToken\s*=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-    this.$http.defaults.headers.common.Authorization = `${token}`;
-    this.getOrder();
-  },
-};
+      '$1'
+    )
+    this.$http.defaults.headers.common.Authorization = `${token}`
+    this.getOrder()
+  }
+}
 </script>
 
 <template>
@@ -127,14 +183,14 @@ export default {
             <ul class="p-3">
               <li class="order-list">訂單編號：{{ order.id }}</li>
               <li class="order-list">購買時間：{{ order.dateString }}</li>
-              <li class="order-list">總金額：{{ order.total }}</li>
+              <li class="order-list">總金額：{{ (order.total).toLocaleString("zh-TW") }}</li>
             </ul>
-            <button
+            <button type="button"
               class="btn btn-primary text-white w-50 btn-lg"
               @click="openModal('edit', order)"
             >
               修改</button
-            ><button
+            ><button type="button"
               class="btn btn-danger text-white w-50 btn-lg"
               @click="openModal('delete', order)"
             >

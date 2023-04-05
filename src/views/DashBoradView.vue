@@ -1,44 +1,61 @@
 <script>
-const { VITE_APP_URL } = import.meta.env;
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2'
+import { Field, Form, ErrorMessage } from 'vee-validate'
+const { VITE_APP_URL } = import.meta.env
+
 export default {
-  data() {
+  data () {
     return {
       user: {
-        username: "",
-        password: "",
-      },
-    };
+        username: '',
+        password: ''
+      }
+    }
   },
   methods: {
-    logIn() {
-      console.log(this.user);
+    logIn () {
       this.$http
         .post(`${VITE_APP_URL}v2/admin/signin`, this.user)
         .then((res) => {
-          console.log(res);
-          const { token, expired } = res.data;
-          document.cookie = `LoginToken=${token};expires=${new Date(expired)};`;
+          const { token, expired } = res.data
+          document.cookie = `LoginToken=${token};expires=${new Date(expired)};`
           Swal.fire({
             toast: true,
-            title: `成功登入`,
-            icon: "success",
-            position: "top-end",
+            title: '成功登入',
+            icon: 'success',
+            position: 'top-end',
             showConfirmButton: false,
             timer: 1500,
-            background: "#F2ECDD",
-            color: "#F25C05",
-          });
-          this.$router.push("/admin/index");
+            background: '#F2ECDD',
+            color: '#F25C05'
+          })
+          this.$router.push('/admin/index')
         })
         .catch((err) => {
-          console.log(err);
-        });
-    },
+          Swal.fire({
+            toast: true,
+            title: `<span style="color: #ff0000"> ${err.response.data.message} </span> 帳號或密碼錯誤，請在重新輸入`,
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
+    }
   },
-  mounted() {},
-};
+  components: {
+    VForm: Form,
+    VField: Field,
+    ErrorMessage
+  },
+  mounted () {
+
+  }
+}
 </script>
+
 <template>
   <div
     class="bg-dark dashBorad d-flex justify-content-center align-items-center"
@@ -58,17 +75,17 @@ export default {
               class="mx-auto d-block d-lg-none"
             />
             <h1>TACHIBANA</h1>
-            <p class="lesp">SUSHI</p>
+            <p class="subtitle">SUSHI</p>
           </div>
           <p class="back text-center bg-dark">後台管理系統</p>
-          <v-form
+          <VForm
             v-slot="{ errors }"
             @submit="logIn"
             class="row text-white py-3 justify-content-center"
           >
             <div class="col-12">
               <label for="email" class="form-label">信箱 </label>
-              <v-field
+              <VField
                 id="email"
                 name="email"
                 type="email"
@@ -77,15 +94,15 @@ export default {
                 :class="{ 'is-invalid': errors['email'] }"
                 placeholder="請輸入 Email"
                 rules="email|required"
-              ></v-field>
-              <error-message
+              ></VField>
+              <ErrorMessage
                 name="email"
                 class="invalid-feedback"
-              ></error-message>
+              ></ErrorMessage>
             </div>
             <div class="col-12 mt-4">
               <label for="password" class="form-label">密碼 </label>
-              <v-field
+              <VField
                 id="password"
                 name="password"
                 type="password"
@@ -94,11 +111,11 @@ export default {
                 :class="{ 'is-invalid': errors['password'] }"
                 placeholder="請輸入密碼"
                 rules="required|min:8"
-              ></v-field>
-              <error-message
+              ></VField>
+              <ErrorMessage
                 name="password"
                 class="invalid-feedback"
-              ></error-message>
+              ></ErrorMessage>
             </div>
             <div class="col-12 mt-4">
               <button
@@ -108,18 +125,18 @@ export default {
                 送出
               </button>
             </div>
-          </v-form>
+          </VForm>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <style lang="scss" scoped>
 .dashBorad {
   background: url("../assets/image/bgImg.jpg") no-repeat center center;
   background-size: cover;
-  min-height: 768px;
-  height: 100vh;
+  min-height: 100vh;
 }
 .bgImg {
   width: 100%;
@@ -133,12 +150,16 @@ export default {
   }
 }
 
-.lesp {
+.subtitle {
   font-family: "Courier New", Courier, monospace;
   font-size: 24px;
   letter-spacing: 1rem;
   @media (max-width: 768px) {
     font-size: 16px;
   }
+}
+
+.form-control:focus{
+  box-shadow: none;
 }
 </style>

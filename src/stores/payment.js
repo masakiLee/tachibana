@@ -1,16 +1,16 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
-const paymentStore = defineStore("payment", {
+const paymentStore = defineStore('payment', {
   state: () => {
     return {
-      success: false,
-    };
+      success: false
+    }
   },
   actions: {
-    setPaymentSuccess(success) {
-      this.success = success;
-    },
-  },
-});
+    setPaymentSuccess (success) {
+      this.success = success
+    }
+  }
+})
 
-export default paymentStore;
+export default paymentStore

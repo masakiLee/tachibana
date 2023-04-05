@@ -1,57 +1,78 @@
 <script>
-import PageHeader from "../../components/PageHeader.vue";
-const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
-import Loading from "vue-loading-overlay";
-import "vue-loading-overlay/dist/css/index.css";
+import PageHeader from '@/components/PageHeader.vue'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/css/index.css'
+import Swal from 'sweetalert2'
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
+
 export default {
-  data() {
+  data () {
     return {
       article: {},
       isLoading: false,
       fullPage: false,
-      coupons: [],
-    };
+      coupons: []
+    }
   },
   methods: {
-    getNewsPage() {
-      // console.log(this.$route.params); // 拿出 id值
-      const { id } = this.$route.params;
+    getNewsPage () {
+      const { id } = this.$route.params
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/article/${id}`)
         .then((res) => {
-          console.log(res.data.article);
-          this.article = res.data.article;
-          const time = res.data.article.create_at;
-          const date = new Date(time * 1000);
-          const dateString = date.toLocaleDateString();
-          this.article.dateString = dateString;
-          this.isLoading = false;
-        });
+          this.article = res.data.article
+          const time = res.data.article.create_at
+          const date = new Date(time * 1000)
+          const dateString = date.toLocaleDateString()
+          this.article.dateString = dateString
+          this.isLoading = false
+        })
+        .catch(() => {
+          Swal.fire({
+            toast: true,
+            title: '<span style="color: #ff0000">獲取最新消息失敗</span>',
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
     },
-    getCoupon() {
+    getCoupon () {
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/coupons`)
         .then((res) => {
-          this.coupons = res.data.coupons;
+          this.coupons = res.data.coupons
         })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+        .catch(() => {
+          Swal.fire({
+            toast: true,
+            title: '<span style="color: #ff0000">獲取優惠券失敗</span>',
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
+    }
   },
   components: {
     PageHeader,
-    Loading,
+    Loading
   },
-  mounted() {
-    this.isLoading = true;
-    this.getNewsPage();
-  },
-};
+  mounted () {
+    this.isLoading = true
+    this.getNewsPage()
+  }
+}
 </script>
 
 <template>
-  <PageHeader></PageHeader>
+  <PageHeader />
   <section class="section-news bg-darkTwo py-8">
     <div class="container">
       <div class="d-flex">
@@ -112,18 +133,18 @@ export default {
                 class="coupon-card border border-dark border-3 text-center row g-0"
               >
                 <div
-                  class="new col-md-4 d-flex justify-content-center align-items-center"
+                  class="col-md-4 d-flex justify-content-center align-items-center"
                 >
-                  <img
-                    src="../../assets/image/confetti.svg"
+                <img
+                    src="@/assets/image/confetti.svg"
                     alt="confetti"
-                    class="confetti"
+                    class="confetti d-none d-md-block"
                   />
                 </div>
                 <div class="body col-md-8">
-                  <p class="p-3 bg-primary text-white">歡慶開幕</p>
-                  <p class="title p-3 bg-dark">OPENSUSHI</p>
-                  <p class="p-3 bg-dark">
+                  <p class="py-2 bg-primary text-white">歡慶開幕</p>
+                  <p class="title pt-3 bg-dark">OPENSUSHI</p>
+                  <p class="py-3 bg-dark">
                     折扣
                     <span class="percent text-primary">80</span>
                     %
@@ -163,10 +184,6 @@ export default {
 .breadcrumb-item:nth-child(2) {
   margin-right: 16px;
 }
-.newsCard {
-  margin-bottom: 24px;
-  box-shadow: 0 3px 3px rgba($color: #000000, $alpha: 0.4);
-}
 
 .newsPages-body {
   padding: 0 12px;
@@ -180,15 +197,6 @@ export default {
   font-size: 12px;
 }
 
-.confetti {
-  width: 180px;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-}
-.title {
-  font-size: 24px;
-  line-height: 1;
-}
 .percent {
   font-size: 32px;
   line-height: 1;
@@ -206,21 +214,6 @@ export default {
   width: 100%;
   aspect-ratio: 16/9;
   object-fit: cover;
-}
-
-.coupon {
-  cursor: pointer;
-}
-
-.couponImg {
-  object-fit: cover;
-  width: 30%;
-  aspect-ratio: 1/1;
-}
-
-.coupon-text,
-.coupon-time {
-  font-size: 16px;
 }
 
 .sushi {

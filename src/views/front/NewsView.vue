@@ -1,45 +1,69 @@
 <script>
-import PageHeader from "../../components/PageHeader.vue";
-import PaginationType from "../../components/PaginationType.vue";
-const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
+import PageHeader from '@/components/PageHeader.vue'
+import PaginationType from '@/components/PaginationType.vue'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/css/index.css'
+import Swal from 'sweetalert2'
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
+
 export default {
-  data() {
+  data () {
     return {
       articles: [],
       page: {},
-    };
+      isLoading: false,
+      fullPage: false
+    }
   },
   methods: {
-    getNews() {
+    getNews () {
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/articles`)
         .then((res) => {
-          this.articles = res.data.articles;
-          this.page = res.data.pagination;
-          //時間搓轉換時間
+          this.articles = res.data.articles
+          this.page = res.data.pagination
+          // 時間搓轉換時間
           this.articles = res.data.articles.map((item) => {
-            const time = item.create_at;
-            const date = new Date(time * 1000);
-            const dateString = date.toLocaleDateString();
+            const time = item.create_at
+            const date = new Date(time * 1000)
+            const dateString = date.toLocaleDateString()
             return {
               ...item,
-              dateString, // 新增 dateString 屬性
-            };
-          });
-        });
-    },
+              dateString // 新增 dateString 屬性
+            }
+          })
+          setTimeout(() => {
+            this.isLoading = false
+          }, 600)
+        })
+        .catch(() => {
+          Swal.fire({
+            toast: true,
+            title: '<span style="color: #ff0000">獲取最新消息失敗</span>',
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
+    }
   },
   components: {
     PageHeader,
     PaginationType,
+    Loading
   },
-  mounted() {
-    this.getNews();
-  },
-};
+  mounted () {
+    this.isLoading = true
+    this.getNews()
+  }
+}
 </script>
+
 <template>
-  <PageHeader></PageHeader>
+  <PageHeader />
   <section class="section-news bg-darkTwo py-8">
     <div class="container">
       <div class="d-flex">
@@ -66,7 +90,17 @@ export default {
           </ol>
         </nav>
       </div>
-      <div class="row align-content-start flex-wrap my-9">
+      <div class="row align-content-start flex-wrap my-9 vl-parent">
+        <loading
+          v-model:active="isLoading"
+          :background-color="'#222222'"
+          :is-full-page="fullPage"
+          :opacity="1"
+        >
+          <div class="sushi">
+            <div class="circular"></div>
+          </div>
+        </loading>
         <div
           class="col-sm-6 col-lg-4"
           v-for="article in articles"
@@ -132,7 +166,7 @@ export default {
 }
 .newsCard {
   margin-bottom: 24px;
-  box-shadow: 0 3px 3px rgba($color: #000000, $alpha: 0.4);
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
 
   .card-img-top {
     object-fit: cover;
@@ -145,7 +179,6 @@ export default {
   }
 
   .card-title {
-    font-size: 24px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

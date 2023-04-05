@@ -1,46 +1,46 @@
 <script>
-const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
-import { RouterLink } from "vue-router";
-import Loading from "vue-loading-overlay";
-import "vue-loading-overlay/dist/css/index.css";
+import { RouterLink } from 'vue-router'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/css/index.css'
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
-  data() {
+  data () {
     return {
       articles: [],
       isLoading: false,
-      fullPage: true,
-    };
+      fullPage: true
+    }
   },
   methods: {
-    getNews() {
+    getNews () {
       this.$http
         .get(`${VITE_APP_URL}v2/api/${VITE_APP_PATH}/articles`)
         .then((res) => {
-          this.articles = res.data.articles;
-          this.isLoading = false;
-          //時間搓轉換時間
+          this.articles = res.data.articles
+          this.isLoading = false
+          // 時間搓轉換時間
           this.articles = res.data.articles.map((item) => {
-            const time = item.create_at;
-            const date = new Date(time * 1000);
-            const dateString = date.toLocaleDateString();
+            const time = item.create_at
+            const date = new Date(time * 1000)
+            const dateString = date.toLocaleDateString()
             return {
               ...item,
-              dateString, // 新增 dateString 屬性
-            };
-          });
-          this.articles = this.articles[0];
-        });
-    },
+              dateString // 新增 dateString 屬性
+            }
+          })
+          this.articles = this.articles[0]
+        })
+    }
   },
   components: {
     Loading,
-    RouterLink,
+    RouterLink
   },
-  mounted() {
-    this.isLoading = true;
-    this.getNews();
-  },
-};
+  mounted () {
+    this.isLoading = true
+    this.getNews()
+  }
+}
 </script>
 
 <template>
@@ -57,54 +57,35 @@ export default {
       <p class="loadingLesp text-center">SUSHI</p>
     </div></loading
   >
-  <section class="section-articles bg-dark">
+  <section class="section-articles bg-dark py-8 py-md-10">
     <div class="container">
-      <div class="row justify-content-center py-10 py-md-9">
-        <div
-          class="col-10 border border-3 border-white d-flex py-9 ps-8 ps-lg-9 pe-8 position-relative"
-        >
-          <h2
-            class="articles-tips translate-middle border border-3 border-primary p-3 bg-dark"
-          >
-            最新消息
-          </h2>
-          <RouterLink class="row" :to="`News/${articles.id}`">
-            <div class="col-md-4">
-              <div class="articles-header h-100">
-                <img
-                  :src="articles.image"
-                  :alt="articles.title"
-                  class="articles-image img-fluid"
-                />
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="articles-body d-flex flex-column h-100">
-                <div class="articles-tag d-flex mt-3">
-                  <div
-                    class="tag p-2 border border-2 border-primary text-white me-2"
-                    v-for="tags in articles.tag"
-                    :key="tags.id"
-                  >
+      <div class="orangeBorder mx-auto">
+        <h2 class="articles-tips p-3 bg-darkTwo position-absolute">最新消息</h2>
+      </div>
+      <div class="card mt-8">
+        <RouterLink to="`News/${articles.id}`" class="row g-0">
+          <div class="col-md-4">
+            <img :src="articles.image" :alt="articles.title" class="articles-image img-fluid"/>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body bg-darkTwo h-100 d-flex flex-column justify-content-around">
+              <div class="articles-tag d-flex align-items-center">
+                <span class="time pe-3">{{ articles.dateString }}</span>
+                <div class="tag py-1 px-2 bg-danger text-white me-3"
+                    v-for="tags in articles.tag" :key="tags.id">
                     {{ tags }}
-                  </div>
-                </div>
-                <span class="time font-monospace my-3">{{
-                  articles.dateString
-                }}</span>
-                <h3 class="articles-title">{{ articles.title }}</h3>
-                <p class="articles-description my-2">
-                  {{ articles.description }}
-                </p>
-                <div class="more ms-auto font-monospace d-flex">
-                  <div class="point"></div>
-                  <div class="point"></div>
-                  <div class="point"></div>
                 </div>
               </div>
+              <h3 class="card-title my-3 my-md-0 mb-0">{{ articles.title }}</h3>
+              <p class="card-text mt-3 mt-md-0">
+                {{ articles.description }}
+              </p>
+              <p class="more text-end">
+                <i class="bi bi-subtract"></i>
+              </p>
             </div>
-          </RouterLink>
-        </div>
+          </div>
+        </RouterLink>
       </div>
     </div>
   </section>
@@ -142,58 +123,46 @@ export default {
 }
 .articles-image {
   width: 100%;
-  height: 100%;
+  height: 220px;
   object-fit: cover;
-  aspect-ratio: 4/3;
 }
 .tag,
 .time,
 .more {
   font-size: 16px;
-  font-weight: 300;
   line-height: 1;
 }
-.point {
-  width: 8px;
-  height: 8px;
-  background: white;
-  border-radius: 4px;
-  margin-right: 4px;
+.orangeBorder {
+  position: relative;
+  width: 125px;
+  height: 48px;
+  @media (max-width: 576px) {
+    width: 104px;
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    z-index: 5;
+    width: 24px;
+    height: 24px;
+    border: 3px solid #f25c05;
+  }
 }
 
-.point {
-  animation: point 6s ease-out infinite;
-}
-@keyframes point {
-  0% {
-    opacity: 0;
-  }
-  75% {
-    opacity: 1;
-  }
-}
-.point:nth-child(1) {
-  animation-delay: 0s;
-}
-.point:nth-child(2) {
-  animation-delay: 1.5s;
-}
-.point:nth-child(3) {
-  animation-delay: 3s;
-}
-
-.articles-description {
-  font-size: 20px;
-}
 .articles-tips {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  writing-mode: vertical-lr;
-  @media (max-width: 992px) {
-    top: 0;
-    left: 50%;
-    writing-mode: horizontal-tb;
-  }
+  z-index: 9;
+  position: relative;
+}
+.card {
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+    border-width: 0;
+    transition: 0.6s;
+    &:hover{
+      transform: translateY(-4px);
+    }
 }
 </style>

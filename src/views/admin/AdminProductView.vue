@@ -1,106 +1,176 @@
 <script>
-const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
-import ProductModal from "../../components/ProductModal.vue";
-import ProductDelModal from "../../components/ProductDelModal.vue";
-import PaginationType from "../../components/PaginationType.vue";
+import ProductModal from '@/components/ProductModal.vue'
+import ProductDelModal from '@/components/ProductDelModal.vue'
+import PaginationType from '@/components/PaginationType.vue'
+import Swal from 'sweetalert2'
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
+
 export default {
-  data() {
+  data () {
     return {
-      //先放get到的
       products: [],
-      //暫存的優惠
       tempProduct: {},
       isNew: false,
-      page: {},
-    };
+      page: {}
+    }
   },
   components: {
     ProductModal,
     ProductDelModal,
-    PaginationType,
+    PaginationType
   },
   methods: {
-    getProducts(page = 1) {
+    getProducts (page = 1) {
       this.$http
         .get(
           `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/products/?page=${page}`
         )
         .then((res) => {
-          this.products = res.data.products;
-          this.page = res.data.pagination;
+          this.products = res.data.products
+          this.page = res.data.pagination
+          if (res.data.success) {
+            Swal.fire({
+              toast: true,
+              title: '取得商品成功',
+              icon: 'success',
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 1500,
+              background: '#F2ECDD',
+              color: '#F25C05'
+            })
+          }
         })
         .catch((err) => {
-          console.log(err);
-        });
+          Swal.fire({
+            toast: true,
+            title: `${err.response.data.message}`,
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
     },
-    //打開
-    openModal(type, item) {
-      if (type === "new") {
-        //新增優惠券
-        this.tempProduct = {};
-        this.isNew = true;
-        this.$refs.modal.productModal.show();
-      } else if (type === "edit") {
-        //修改優惠券
-        this.isNew = false;
-        this.tempProduct = { ...item };
-        this.$refs.modal.productModal.show();
-      } else if (type === "delete") {
-        //刪除優惠券
-        this.$refs.delModal.productDelModal.show();
-        this.tempProduct = { ...item };
+    // 打開
+    openModal (type, item) {
+      if (type === 'new') {
+        // 新增優惠券
+        this.tempProduct = {}
+        this.isNew = true
+        this.$refs.modal.productModal.show()
+      } else if (type === 'edit') {
+        // 修改優惠券
+        this.isNew = false
+        this.tempProduct = { ...item }
+        this.$refs.modal.productModal.show()
+      } else if (type === 'delete') {
+        // 刪除優惠券
+        this.$refs.delModal.productDelModal.show()
+        this.tempProduct = { ...item }
       }
     },
-    //新增商品
-    updateProduct() {
-      //先預設為新增商品
-      let newurl = `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/product`;
-      let http = "post";
-      //如果是修改則更改url & http
+    // 新增商品
+    updateProduct () {
+      // 先預設為新增商品
+      let newurl = `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/product`
+      let http = 'post'
+      // 如果是修改則更改url & http
       if (!this.isNew) {
-        newurl = `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/product/${this.tempProduct.id}`;
-        http = "put";
+        newurl = `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/product/${this.tempProduct.id}`
+        http = 'put'
       }
       // 帶入不同的api
       this.$http[http](newurl, { data: this.tempProduct })
-        .then((response) => {
-          alert(response.data.message);
-          this.$refs.modal.productModal.hide();
-          this.getProducts();
+        .then((res) => {
+          this.$refs.modal.productModal.hide()
+          this.getProducts()
+          Swal.fire({
+            toast: true,
+            title: `${res.data.message}`,
+            icon: 'success',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#F25C05'
+          })
         })
         .catch((err) => {
-          alert(err);
-        });
+          const arr = err.response.data.message
+          // 先拆開抓英文出來
+          const enArr = arr.map((item) => item.split(' ')[1])
+          // 再寫上對應中文
+          const zhEnMap = {
+            title: '標題',
+            category: '分類',
+            unit: '單位',
+            origin_price: '原價',
+            price: '售價'
+          }
+          const zhArrTrans = enArr.map(item => zhEnMap[item])
+          const newArr = enArr.map((item, index) => `${zhArrTrans[index]}為必填`)
+          Swal.fire({
+            toast: true,
+            title: `${newArr}`,
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
     },
-    //刪除
-    delProduct() {
-      const url = `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/product/${this.tempProduct.id}`;
+    // 刪除
+    delProduct () {
+      const url = `${VITE_APP_URL}v2/api/${VITE_APP_PATH}/admin/product/${this.tempProduct.id}`
       this.$http
         .delete(url)
-        .then((response) => {
-          alert(response.data.message);
-          this.$refs.delModal.productDelModal.hide();
-          this.getProducts();
+        .then((res) => {
+          this.$refs.delModal.productDelModal.hide()
+          this.getProducts()
+          Swal.fire({
+            toast: true,
+            title: `${res.data.message}`,
+            icon: 'success',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#F25C05'
+          })
         })
         .catch((err) => {
-          alert(err);
-        });
+          Swal.fire({
+            toast: true,
+            title: `${err.response.data.message}`,
+            icon: 'error',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#F2ECDD',
+            color: '#000000'
+          })
+        })
     },
-    //新增照片
-    createImages() {
-      this.tempProduct.imagesUrl = [];
-      this.tempProduct.imagesUrl.push("");
-    },
+    // 新增照片
+    createImages () {
+      this.tempProduct.imagesUrl = []
+      this.tempProduct.imagesUrl.push('')
+    }
   },
-  mounted() {
+  mounted () {
     const token = document.cookie.replace(
       /(?:(?:^|.*;\s*)LoginToken\s*=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-    this.$http.defaults.headers.common.Authorization = `${token}`;
-    this.getProducts();
-  },
-};
+      '$1'
+    )
+    this.$http.defaults.headers.common.Authorization = `${token}`
+    this.getProducts()
+  }
+}
 </script>
 
 <template>
@@ -122,12 +192,12 @@ export default {
                 <img :src="product.imageUrl" alt="" />
               </div>
             </div>
-            <button
+            <button type="button"
               class="btn btn-primary text-white w-50 btn-lg"
               @click="openModal('edit', product)"
             >
               修改</button
-            ><button
+            ><button type="button"
               class="btn btn-danger text-white w-50 btn-lg"
               @click="openModal('delete', product)"
             >

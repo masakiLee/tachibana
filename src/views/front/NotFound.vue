@@ -1,26 +1,27 @@
 <script>
-import PageHeader from "../../components/PageHeader.vue";
+import PageHeader from '@/components/PageHeader.vue'
 export default {
-  data() {
+  data () {
     return {
       second: 5,
-      intervalId: null,
-    };
+      intervalId: null
+    }
   },
   components: {
-    PageHeader,
+    PageHeader
   },
-  mounted() {
+  mounted () {
     this.intervalId = setInterval(() => {
-      this.second--;
+      this.second--
       if (this.second === 0) {
-        clearInterval(this.intervalId);
-        this.$router.push(`/`);
+        clearInterval(this.intervalId)
+        this.$router.push('/')
       }
-    }, 1000);
-  },
-};
+    }, 1000)
+  }
+}
 </script>
+
 <template>
   <PageHeader></PageHeader>
   <div
@@ -35,6 +36,7 @@ export default {
     </div>
   </div>
 </template>
+
 <style>
 .notFount {
   min-height: 100vh;

@@ -1,12 +1,7 @@
 <script>
 export default {
-  props: ["pages", "getProducts"],
-  data() {
-    return {};
-  },
-  methods: {},
-  mounted() {},
-};
+  props: ['pages', 'getProducts']
+}
 </script>
 
 <template>

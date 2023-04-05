@@ -1,45 +1,44 @@
 <script>
-import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
-//載入UI庫
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+
 export default {
-  props: ["isNew", "article"],
-  emits: ["update-article"],
-  data() {
+  props: ['isNew', 'article'],
+  emits: ['update-article'],
+  data () {
     return {
       tempArticle: {
-        tag: [""],
+        tag: ['']
       },
       create_at: 0,
       editor: ClassicEditor,
-      editorData: "<p>Hello world!!</p>",
+      editorData: '',
       editorConfig: {
-        toolbar: ["heading", "|", "bold", "italic", "link"],
-      },
-    };
+        toolbar: ['heading', '|', 'bold', 'italic', 'link']
+      }
+    }
   },
   methods: {},
-  mounted() {
+  mounted () {
     this.articleModal = new bootstrap.Modal(
       this.$refs.articleModal,
-      //options 不能使用 esc 關閉
       {
-        keyboard: false,
+        keyboard: false
       }
-    );
+    )
   },
   watch: {
-    article() {
+    article () {
       this.tempArticle = this.article;
       [this.create_at] = new Date(this.tempArticle.create_at * 1000)
         .toISOString()
-        .split("T");
+        .split('T')
     },
-    create_at() {
-      this.tempArticle.create_at = Math.floor(new Date(this.create_at) / 1000);
-    },
-  },
-};
+    create_at () {
+      this.tempArticle.create_at = Math.floor(new Date(this.create_at) / 1000)
+    }
+  }
+}
 </script>
 
 <template>
@@ -78,6 +77,7 @@ export default {
                 <img
                   class="img-fluid mb-3 articleImg"
                   :src="tempArticle.image"
+                  :alt="tempArticle.title"
                 />
               </div>
               <div v-else><img alt="" /></div>

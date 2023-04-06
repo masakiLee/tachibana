@@ -117,7 +117,7 @@ export default {
   top: 0;
   right: 0;
   width: max-content;
-  z-index: 8;
+  z-index: 12;
   background-color: transparent;
   #nav-toggler {
     display: none;

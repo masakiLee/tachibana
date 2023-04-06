@@ -80,7 +80,7 @@ export default {
                   :alt="tempArticle.title"
                 />
               </div>
-              <div v-else><img alt="" /></div>
+              <div v-else><img alt="none" /></div>
               <div class="mb-3">
                 <label for="image" class="form-label">文章圖片網址</label>
                 <input

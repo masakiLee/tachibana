@@ -145,19 +145,8 @@ export default {
               class="form-control text-white"
               placeholder="輸入OPENSUSHI享8折優惠"
               v-model="copuon.code"
-              :disabled="hasCoupon"
             />
             <button
-              v-if="hasCoupon"
-              class="btn btn-primary btn-lg text-white"
-              type="button"
-              id="button-addon2"
-              disabled
-            >
-              已使用
-            </button>
-            <button
-              v-else
               class="btn btn-primary btn-lg text-white"
               type="button"
               id="button-addon2"
@@ -167,8 +156,7 @@ export default {
             </button>
           </div>
           <div class="text-end total">
-            總金額： <span v-if="hasCoupon">NT$ {{ (total * 0.8).toLocaleString('zh-TW') }}</span>
-            <span v-else>NT$ {{ (total).toLocaleString('zh-TW') }}</span>
+            總金額：<span>NT$ {{ (final_total).toLocaleString('zh-TW') }}</span>
           </div>
           <div class="d-flex justify-content-between mt-4 next">
             <RouterLink

@@ -42,7 +42,9 @@ export default {
             <div class="orangeBorder align-self-start">
               <h2 class="about-tips p-3 bg-dark position-absolute">橘鮨理念</h2>
             </div>
-            <h3 class="about-text mt-7 mt-md-9 ms-10">
+            <h3 class="about-text mt-7 mt-md-9 ms-10" data-aos="fade-right"
+              data-aos-duration="1000"
+              data-aos-easing="ease-in-sine">
               選用新鮮食材 最適合的調理方式 並以精美刀工 盛裝的器皿融合色彩
               平衡呈現於盤上 享用美食同時 欣賞到精緻的藝術品
             </h3>
@@ -53,13 +55,11 @@ export default {
             <li class="aboutPictureList"
               v-for="aboutPicture in aboutPicture"
               :key="aboutPicture.imageUrl"
-              :class="aboutPicture.bsClass"
-            >
+              :class="aboutPicture.bsClass">
               <img
                 :src="aboutPicture.imageUrl"
                 alt="aboutPicture"
-                class="aboutPicture"
-              />
+                class="aboutPicture"/>
             </li>
           </ul>
         </div>

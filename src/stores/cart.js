@@ -144,7 +144,7 @@ const cartStore = defineStore('cart', {
           this.final_total = res.data.data.final_total
           Swal.fire({
             toast: true,
-            title: '已成功使用優惠券',
+            title: '已成功套用優惠券',
             icon: 'success',
             position: 'top-end',
             showConfirmButton: false,

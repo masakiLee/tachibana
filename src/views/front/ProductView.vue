@@ -137,7 +137,7 @@ export default {
                 <h3 class="title mx-auto">{{ product.title }}</h3>
                 <img
                   :src="product.imageUrl"
-                  alt=""
+                  :alt="product.title"
                   class="productUrlImg mt-4"
                 />
               </div>
@@ -158,8 +158,8 @@ export default {
                 </p>
                 <div class="group d-flex">
                   <select
-                    name=""
-                    id=""
+                    name="number"
+                    id="product-number"
                     class="form-select w-25 ps-3 flex-fill"
                     v-model="qty"
                   >
@@ -186,7 +186,7 @@ export default {
             :key="index + '123'"
           >
             <div class="productImg" data-aos="zoom-in">
-              <img v-if="img" :src="img" alt="" class="productsUrl" />
+              <img v-if="img" :src="img" alt="products" class="productsUrl" />
             </div>
           </div>
         </div>
@@ -228,7 +228,7 @@ export default {
                 <div class="my-auto">
                   <img
                     :src="category.imageUrl"
-                    alt=""
+                    :alt="category.title"
                     class="categoryImg mx-auto"
                   />
                 </div>

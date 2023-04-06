@@ -62,7 +62,8 @@ export default {
       <div class="orangeBorder mx-auto">
         <h2 class="articles-tips p-3 bg-darkTwo position-absolute">最新消息</h2>
       </div>
-      <div class="card mt-8">
+      <div class="card mt-8" data-aos="fade-up"
+     data-aos-anchor-placement="top-bottom">
         <RouterLink to="`News/${articles.id}`" class="row g-0">
           <div class="col-md-4">
             <img :src="articles.image" :alt="articles.title" class="articles-image img-fluid"/>

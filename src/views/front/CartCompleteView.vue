@@ -31,7 +31,7 @@ export default {
               data-aos-delay="600"
               data-aos-duration="2000"
             >
-              <img src="@/assets/image/gift.svg" alt="" class="mx-auto" />
+              <img src="@/assets/image/gift.svg" alt="感謝購買" class="mx-auto" />
               <ul class="text-center pt-4">
                 <li>訂單完成，感謝購買！</li>
                 <li>還有更多優質商品，歡迎繼續選購！</li>

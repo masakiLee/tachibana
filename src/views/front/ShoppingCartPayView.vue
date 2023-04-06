@@ -217,14 +217,7 @@ export default {
             </div>
           </div>
         </div>
-        <div class="d-flex justify-content-between next">
-          <RouterLink
-            to="/shoppingCartCheck"
-            type="button"
-            class="btn btn-outline-light btn-lg"
-          >
-            <i class="bi bi-arrow-left-square"></i> 回上頁
-          </RouterLink>
+        <div class="d-flex justify-content-end next">
           <button type="button" class="btn btn-danger text-white btn-lg" @click="payOrder()">
             確認交易 <i class="bi bi-arrow-right-square"></i>
           </button>

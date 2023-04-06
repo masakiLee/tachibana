@@ -26,18 +26,31 @@ export default {
         .then((res) => {
           const orderId = res.data.orderId
           this.$refs.form.resetForm()
-          this.$router.push(`/shoppingCartPay/${orderId}`)
-          Swal.fire({
-            toast: true,
-            title: '已送出訂單',
-            icon: 'success',
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1500,
-            background: '#F2ECDD',
-            color: '#F25C05'
-          })
-          this.order.message = ''
+          if (orderId === undefined) {
+            Swal.fire({
+              toast: true,
+              title: '<span style="color: #ff0000">需填收件人資訊</span>',
+              icon: 'error',
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 1500,
+              background: '#F2ECDD',
+              color: '#000000'
+            })
+          } else {
+            this.$router.push(`/shoppingCartPay/${orderId}`)
+            Swal.fire({
+              toast: true,
+              title: '已送出訂單',
+              icon: 'success',
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 1500,
+              background: '#F2ECDD',
+              color: '#F25C05'
+            })
+            this.order.message = ''
+          }
         })
         .catch(() => {
           Swal.fire({
@@ -238,14 +251,7 @@ export default {
             </div>
           </div>
         </div>
-        <div class="d-flex justify-content-between next">
-          <RouterLink
-            to="shoppingCart"
-            type="button"
-            class="btn btn-outline-light btn-lg"
-          >
-            <i class="bi bi-arrow-left-square"></i> 回上頁
-          </RouterLink>
+        <div class="d-flex justify-content-end next">
           <button type="submit" class="btn btn-danger text-white btn-lg" @click="onSubmit">
             送出訂單 <i class="bi bi-arrow-right-square"></i>
           </button>

@@ -67,7 +67,7 @@
 .menuTwo {
   width: 520px;
   height: 200px;
-  right: 0;
+  right: -48px;
   bottom: 24%;
   @media (max-width: 1200px) {
     width: 460px;
@@ -122,7 +122,7 @@
 }
 .menu-tips {
   writing-mode: vertical-lr;
-  z-index: 9;
+  z-index: 7;
 }
 
 .menu-text {

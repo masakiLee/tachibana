@@ -255,7 +255,7 @@ export default {
 .bi-text{
   font-size: 20px;
     @media (max-width: 576px) {
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 .information {

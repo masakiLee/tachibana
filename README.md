@@ -14,9 +14,9 @@
 ### Layout
 ![Imgur](https://i.imgur.com/vvSKCmT.png)
 ### 首頁
-![Imgur](https://i.imgur.com/5bvdATX.png)
+![Imgur](https://i.imgur.com/fsBQXDN.png)
 ### 產品頁
-![Imgur](https://i.imgur.com/JArunCv.png)
+![Imgur](https://i.imgur.com/1M6gzvb.png)
 ### 單一產品內頁
 ![Imgur](https://i.imgur.com/NLwwt9M.png)
 

@@ -137,9 +137,6 @@ export default {
   position: relative;
   width: 125px;
   height: 48px;
-  @media (max-width: 576px) {
-    width: 104px;
-  }
 
   &::before {
     content: "";

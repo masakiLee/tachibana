@@ -104,10 +104,6 @@
   width: 48px;
   height: 125px;
 
-  @media (max-width: 576px) {
-    height: 104px;
-  }
-
   &::before {
     content: "";
     display: block;

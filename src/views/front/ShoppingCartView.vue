@@ -390,4 +390,11 @@ input {
     margin: auto;
   }
 }
+
+.bi-cart-dash {
+  display: block;
+  @media (max-width: 576px) {
+    display: none;
+  }
+}
 </style>

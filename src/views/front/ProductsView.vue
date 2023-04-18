@@ -127,19 +127,35 @@ export default {
             >軍艦</a
           >
         </nav>
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 g-md-6">
+        <div
+          class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 g-md-6"
+        >
           <div class="col" v-for="products in products" :key="products.id">
             <div class="box bg-dark">
               <h3 class="title p-3">{{ products.title }}</h3>
               <div class="bgOrange ms-auto">
-                <img :src="products.imageUrl" :alt="products.title" class="pic">
+                <img
+                  :src="products.imageUrl"
+                  :alt="products.title"
+                  class="pic"
+                />
               </div>
               <span class="price bg-danger py-1 px-2 ms-3">
                 NT$ {{ products.price }}
               </span>
-              <div class="mark d-flex justify-content-evenly align-items-center">
-                <RouterLink :to="`product/${products.id}`" type="button" class="bi bi-search border border-3 px-2 rounded-3"></RouterLink>
-                <button type="button" class="bi bi-cart-dash border border-primary border-3 bg-primary px-2 rounded-3 text-white" @click="addToCart(products.id, qty)"></button>
+              <div
+                class="mark d-flex justify-content-evenly align-items-center"
+              >
+                <RouterLink
+                  :to="`product/${products.id}`"
+                  type="button"
+                  class="bi bi-search border border-3 px-2 rounded-3"
+                ></RouterLink>
+                <button
+                  type="button"
+                  class="bi bi-cart-dash border border-primary border-3 bg-primary px-2 rounded-3 text-white"
+                  @click="addToCart(products.id, qty)"
+                ></button>
               </div>
             </div>
           </div>
@@ -179,7 +195,7 @@ export default {
   color: white;
   &.active {
     background-color: #1b1b1b;
-    border-bottom: 5px solid #f25C05;
+    border-bottom: 5px solid #f25c05;
   }
 }
 .box {
@@ -188,27 +204,27 @@ export default {
   position: relative;
   cursor: pointer;
   transition: 1s all;
-  &:hover{
+  &:hover {
     transform: translateY(-5px);
     .mark {
       opacity: 1;
     }
   }
 }
-.bgOrange{
+.bgOrange {
   width: 106px;
   height: 90px;
-  background: #f25C05;
+  background: #f25c05;
   border-top-left-radius: 100%;
   position: relative;
 }
-.pic{
+.pic {
   position: absolute;
   bottom: 0;
   right: 0;
   transform: scale(1.3);
 }
-.price{
+.price {
   position: absolute;
   font-size: 12px;
   bottom: 8px;
@@ -220,7 +236,14 @@ export default {
   background-color: rgba(27, 27, 27, 0.9);
   opacity: 0;
 }
-.bi{
+.bi {
   font-size: 24px;
+}
+
+.bi-cart-dash {
+  display: block;
+  @media (max-width: 576px) {
+    display: none;
+  }
 }
 </style>

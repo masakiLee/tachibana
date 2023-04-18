@@ -31,7 +31,7 @@ export default {
   <div class="bg-dark">
     <nav class="navbar navbar-expand-lg navbar-light bg-darkTwo">
       <div class="container-fluid">
-        <routerLink to="/admin/index" class="py-2">TACHIBANA SUSHI</routerLink>
+        <routerLink to="/admin" class="py-2">TACHIBANA SUSHI</routerLink>
         <button
           class="navbar-toggler collapsed"
           type="button"

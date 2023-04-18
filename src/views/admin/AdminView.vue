@@ -1,6 +1,7 @@
 <script>
 import AdminNav from '@/components/AdminNav.vue'
 const { VITE_APP_URL } = import.meta.env
+
 export default {
   data () {
     return {}

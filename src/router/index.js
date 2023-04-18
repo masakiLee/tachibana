@@ -58,7 +58,7 @@ const router = createRouter({
       component: () => import('@/views/admin/AdminView.vue'),
       children: [
         {
-          path: 'index',
+          path: '',
           component: () => import('@/views/admin/AdminIndexView.vue')
         },
         {

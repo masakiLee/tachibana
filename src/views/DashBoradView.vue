@@ -29,7 +29,7 @@ export default {
             background: '#F2ECDD',
             color: '#F25C05'
           })
-          this.$router.push('/admin/index')
+          this.$router.push('/admin')
         })
         .catch((err) => {
           Swal.fire({
@@ -66,12 +66,12 @@ export default {
           <div class="logo text-center">
             <img
               src="../assets/image/logo.svg"
-              alt=""
+              alt="TACHIBANA SUSHI"
               class="mx-auto d-none d-lg-block"
             />
             <img
               src="../assets/image/logo-sm.svg"
-              alt=""
+              alt="TACHIBANA SUSHI"
               class="mx-auto d-block d-lg-none"
             />
             <h1>TACHIBANA</h1>

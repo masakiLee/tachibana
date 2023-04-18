@@ -69,9 +69,7 @@ export default {
   <section class="section-cart bg-darkTwo py-8">
     <div class="container">
       <div class="bg-dark p-4 text-center">
-        <ul
-          class="step d-flex mb-4 border-bottom border-3 border-primary"
-        >
+        <ul class="step d-flex mb-4 border-bottom border-3 border-primary">
           <li class="text-center bg-primary py-2 stepList flex-fill">
             <i class="bi bi-1-square"></i> 購物車
           </li>
@@ -135,7 +133,9 @@ export default {
                     </option>
                   </select>
                 </td>
-                <td class="text-end">NT$ {{ (cart.total).toLocaleString('zh-TW') }}</td>
+                <td class="text-end">
+                  NT$ {{ cart.total.toLocaleString("zh-TW") }}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -156,15 +156,21 @@ export default {
             </button>
           </div>
           <div class="text-end total">
-            總金額：<span>NT$ {{ (final_total).toLocaleString('zh-TW') }}</span>
+            總金額：<span>NT$ {{ final_total.toLocaleString("zh-TW") }}</span>
           </div>
           <div class="d-flex justify-content-between mt-4 next">
             <RouterLink
-                to="products" type="button" class="btn btn-outline-light btn-lg">
+              to="products"
+              type="button"
+              class="btn btn-outline-light btn-lg"
+            >
               <i class="bi bi-arrow-left-square"></i> 繼續購物
             </RouterLink>
             <RouterLink
-                to="shoppingCartCheck" type="button" class="btn btn-danger text-white btn-lg">
+              to="shoppingCartCheck"
+              type="button"
+              class="btn btn-danger text-white btn-lg"
+            >
               結帳去 <i class="bi bi-arrow-right-square"></i>
             </RouterLink>
           </div>
@@ -200,11 +206,6 @@ export default {
                       type="button"
                       class="bi bi-search border border-3 px-2 rounded-3"
                     ></RouterLink>
-                    <button
-                      type="button"
-                      class="bi bi-cart-dash border border-primary border-3 bg-primary px-2 rounded-3 text-white"
-                      @click="addToCart(likes.id, qty)"
-                    ></button>
                   </div>
                 </div>
               </div>
@@ -253,12 +254,13 @@ input {
     background-position: right 0.25rem center;
   }
 }
-.form-control::placeholder{
+.form-control::placeholder {
   font-size: 16px;
   color: #666;
 }
 .form-control:focus,
-.form-select:focus,.form-control:disabled {
+.form-select:focus,
+.form-control:disabled {
   background-color: #212121;
   box-shadow: none;
   color: white;
@@ -316,10 +318,10 @@ input {
   position: relative;
   cursor: pointer;
   transition: 1s all;
-  &:hover{
+  &:hover {
     transform: translateY(-5px);
     .mark {
-    opacity: 1;
+      opacity: 1;
     }
   }
 }

@@ -52,9 +52,11 @@ export default {
           class="shoppingCar mx-auto"
           title="shoppingCar"
         />
-        <span v-if="carts.length" class="badge bg-danger position-absolute rounded-pill">{{
-          carts.length
-        }}</span>
+        <span
+          v-if="carts.length"
+          class="badge bg-danger position-absolute rounded-pill"
+          >{{ carts.length }}</span
+        >
       </button>
     </RouterLink>
   </header>
@@ -123,8 +125,8 @@ export default {
     display: none;
   }
   #nav-toggler:checked ~ .nav {
-    visibility:visible;
-    opacity:1;
+    visibility: visible;
+    opacity: 1;
     top: 0;
     right: 0;
   }
@@ -153,7 +155,7 @@ export default {
     background-color: #1b1b1b;
     opacity: 0;
     transition: opacity 0.6s ease-in-out;
-    visibility:hidden;
+    visibility: hidden;
 
     .navList {
       font-size: 32px;
@@ -223,6 +225,7 @@ export default {
 }
 
 .footer {
+  margin-top: auto;
   .logo {
     width: 160px;
     @media (max-width: 992px) {

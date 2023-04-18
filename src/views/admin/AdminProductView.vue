@@ -189,7 +189,7 @@ export default {
             <div class="d-flex align-items-stretch">
               <p class="px-4 py-2 bg-dark text-white">{{ product.title }}</p>
               <div class="product-image p-4">
-                <img :src="product.imageUrl" alt="" />
+                <img :src="product.imageUrl" alt="productImg" />
               </div>
             </div>
             <button type="button"

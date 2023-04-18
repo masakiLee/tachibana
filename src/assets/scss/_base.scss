@@ -1,10 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Permanent+Marker&display=swap');
 
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
 body {
     line-height: 1.5;
     font-size: 20px;
     font-family: 'Kosugi Maru';
     color: white;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -22,6 +30,7 @@ h1 {
 
 h2 {
     font-size: 24px;
+
     @media (max-width: 576px) {
         font-size: 20px;
     }
@@ -78,4 +87,15 @@ p {
 .swal2-title {
     font-family: monospace;
     outline: none;
+}
+
+
+.section-Complete,
+.section-news,
+.section-news,
+.notFount,
+.section-products,
+.section-product,
+.section-cart {
+    min-height: calc(100vh - 80px - 295px);
 }

@@ -252,9 +252,18 @@ export default {
           </div>
         </div>
         <div class="d-flex justify-content-end next">
-          <button type="submit" class="btn btn-danger text-white btn-lg" @click="onSubmit">
+          <button
+            type="submit"
+            class="btn btn-danger text-white btn-lg"
+            @click="onSubmit"
+          >
             送出訂單 <i class="bi bi-arrow-right-square"></i>
           </button>
+          <button
+            type="button"
+            class="bi bi-cart-dash border border-primary border-3 bg-primary px-2 rounded-3 text-white"
+            @click="addToCart(products.id, qty)"
+          ></button>
         </div>
       </div>
     </div>
@@ -322,8 +331,9 @@ textarea {
   border-bottom: 24px solid #0000;
   border-left: 16px solid #f25c05;
 }
-.stepList::before,.stepList::after{
-    @media (max-width: 768px) {
+.stepList::before,
+.stepList::after {
+  @media (max-width: 768px) {
     display: none;
   }
 }

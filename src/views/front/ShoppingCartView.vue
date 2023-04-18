@@ -209,7 +209,7 @@ export default {
                     <button
                       type="button"
                       class="bi bi-cart-dash border border-primary border-3 bg-primary px-2 rounded-3 text-white"
-                      @click="addToCart(products.id, qty)"
+                      @click="addToCart(likes.id, qty)"
                     ></button>
                   </div>
                 </div>

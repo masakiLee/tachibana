@@ -66,7 +66,7 @@ export default {
      data-aos-anchor-placement="top-bottom">
         <RouterLink to="`News/${articles.id}`" class="row g-0">
           <div class="col-md-4">
-            <img :src="articles.image" :alt="articles.title" class="articles-image img-fluid"/>
+            <img :src="articles.image" alt="最新消息" class="articles-image img-fluid"/>
           </div>
           <div class="col-md-8">
             <div class="card-body bg-darkTwo h-100 d-flex flex-column justify-content-around">

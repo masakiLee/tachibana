@@ -259,11 +259,6 @@ export default {
           >
             送出訂單 <i class="bi bi-arrow-right-square"></i>
           </button>
-          <button
-            type="button"
-            class="bi bi-cart-dash border border-primary border-3 bg-primary px-2 rounded-3 text-white"
-            @click="addToCart(products.id, qty)"
-          ></button>
         </div>
       </div>
     </div>

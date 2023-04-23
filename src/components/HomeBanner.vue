@@ -32,12 +32,12 @@ export default {
       <img
         src="../assets/image/logo.svg"
         alt="logo"
-        class="logo-img mx-auto d-none d-lg-block"
+        class="logo-img mx-auto d-none d-md-block"
       />
       <img
         src="../assets/image/logo-sm.svg"
         alt="logo"
-        class="logo-img mx-auto d-block d-lg-none"
+        class="logo-img mx-auto d-block d-md-none"
       />
       <h1>TACHIBANA</h1>
       <p class="logo-name">SUSHI</p>
@@ -68,7 +68,6 @@ export default {
   object-fit: cover;
   @media (max-width: 768px) {
     aspect-ratio: 3/4;
-    height: 100%;
   }
 }
 .banner {

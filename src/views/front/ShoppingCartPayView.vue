@@ -55,7 +55,6 @@ export default {
             this.setPaymentSuccess(true)
             this.$router.push('/cartComplete')
           }
-          this.getCart()
           Swal.fire({
             toast: true,
             title: '已成功付款',
@@ -218,7 +217,11 @@ export default {
           </div>
         </div>
         <div class="d-flex justify-content-end next">
-          <button type="button" class="btn btn-danger text-white btn-lg" @click="payOrder()">
+          <button
+            type="button"
+            class="btn btn-danger text-white btn-lg"
+            @click="payOrder()"
+          >
             確認交易 <i class="bi bi-arrow-right-square"></i>
           </button>
         </div>
@@ -228,7 +231,6 @@ export default {
 </template>
 
 <style lang="scss">
-
 .step li {
   position: relative;
   @media (max-width: 768px) {
@@ -252,9 +254,9 @@ export default {
   }
 }
 
-.bi-text{
+.bi-text {
   font-size: 20px;
-    @media (max-width: 576px) {
+  @media (max-width: 576px) {
     font-size: 12px;
   }
 }

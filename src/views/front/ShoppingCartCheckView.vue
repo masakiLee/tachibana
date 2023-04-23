@@ -39,6 +39,7 @@ export default {
             })
           } else {
             this.$router.push(`/shoppingCartPay/${orderId}`)
+            this.getCart()
             Swal.fire({
               toast: true,
               title: '已送出訂單',
@@ -52,7 +53,7 @@ export default {
             this.order.message = ''
           }
         })
-        .catch(() => {
+        .catch((err) => {
           Swal.fire({
             toast: true,
             title: '<span style="color: #ff0000">訂單送出失敗</span>',
@@ -63,6 +64,7 @@ export default {
             background: '#F2ECDD',
             color: '#000000'
           })
+          console.dir(err.response.data.message)
         })
     },
     isPhone (value) {
